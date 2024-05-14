@@ -28,7 +28,7 @@ spec:
             - job_name: "tyk-gateway"
               static_configs:
               - targets:
-                - 'prometheus-otel-collector-opentelemetry-collector:9464'
+                - 'opentelemetry-collector:9464'
             - job_name: otel-collector
               static_configs:
               - targets:

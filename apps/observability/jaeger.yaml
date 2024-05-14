@@ -30,7 +30,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/TykTechnologies/tyk-argicd-demo.git
+    repoURL: https://github.com/TykTechnologies/tyk-argocd-demo.git
     targetRevision: HEAD
     path: resources/jaeger
   destination:

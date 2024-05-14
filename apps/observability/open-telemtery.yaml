@@ -39,10 +39,12 @@ spec:
             prometheus:
               endpoint: "0.0.0.0:9464"
           extensions:
+            health_check:
+              endpoint: "0.0.0.0:13133"
             pprof:
-              endpoint: ":1888"
+              endpoint: "0.0.0.0:1888"
             zpages:
-              endpoint: ":55679"
+              endpoint: "0.0.0.0:55679"
           connectors:
             spanmetrics:
               histogram:
@@ -62,6 +64,10 @@ spec:
                 - name: "tyk.gw.id"
                 - name: "service.version"
           service:
+            extensions:
+            - "pprof"
+            - "zpages"
+            - "health_check"
             pipelines:
               traces:
                 receivers:
@@ -90,9 +96,3 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
-
-#      service:
-#        extensions:
-#          - "pprof"
-#          - "zpages"
-#          - "health_check"
