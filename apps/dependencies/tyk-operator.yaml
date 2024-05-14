@@ -2,14 +2,16 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: httpbin
+  name: tyk-operator
   namespace: argocd
 spec:
   project: default
   source:
-    repoURL: https://github.com/TykTechnologies/tyk-argocd-demo.git
-    targetRevision: HEAD
-    path: resources/httpbin
+    repoURL: https://helm.tyk.io/public/helm/charts
+    chart: tyk-operator
+    targetRevision: v0.18.0
+    helm:
+      releaseName: tyk-operator
   destination:
     server: https://kubernetes.default.svc
     namespace: tyk

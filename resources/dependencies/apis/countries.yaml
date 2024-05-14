@@ -1,0 +1,75 @@
+---
+apiVersion: tyk.tyk.io/v1alpha1
+kind: ApiDefinition
+metadata:
+  name: countries
+spec:
+  name: Countries
+  protocol: http
+  active: true
+  proxy:
+    target_url: ""
+    listen_path: /countries
+    strip_listen_path: true
+  enable_detailed_recording: true
+  detailed_tracing: true
+  use_keyless: true
+  graphql:
+    enabled: true
+    execution_mode: executionEngine
+    schema: |
+      type Country {
+        name: String
+        code: String
+        restCountry: RestCountry
+      }
+
+      type Query {
+        countries: [Country]
+      }
+
+      type RestCountry {
+        altSpellings: [String]
+        subregion: String
+        population: Int
+      }
+    version: "2"
+    playground:
+      enabled: true
+      path: /playground
+    engine:
+      field_configs:
+        - disable_default_mapping: false
+          field_name: countries
+          path:
+            - "countries"
+          type_name: Query
+        - disable_default_mapping: true
+          field_name: restCountry
+          path: []
+          type_name: Country
+      data_sources:
+        - kind: "GraphQL"
+          name: "countries"
+          internal: false
+          root_fields:
+            - type: Query
+              fields:
+                - "countries"
+          config:
+            url: "https://countries.trevorblades.com/"
+            method: "POST"
+            headers: {}
+            body: ""
+        - kind: "REST"
+          internal: false
+          name: "restCountries"
+          root_fields:
+            - type: "Country"
+              fields:
+                - "restCountry"
+          config:
+            url: "https://restcountries.com/v2/alpha/{{ .object.code }}"
+            method: "GET"
+            body: ""
+            headers: {}

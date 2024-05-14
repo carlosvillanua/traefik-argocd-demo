@@ -1,0 +1,91 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: grafana-dashboards
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/TykTechnologies/tyk-argocd-demo.git
+    targetRevision: HEAD
+    path: resources/observability/grafana
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: tyk
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: tyk-garafana
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://grafana.github.io/helm-charts
+    chart: grafana
+    targetRevision: v8.3.6
+    helm:
+      releaseName: tyk-grafana
+      values: |
+        adminPassword: topsecretpassword
+        datasources:
+          "datasources.yaml":
+            apiVersion: 1
+            datasources:
+            - name: "Prometheus"
+              type: "prometheus"
+              url: "http://tyk-prometheus-server:80"
+              access: "proxy"
+              isDefault: true
+        dashboardProviders:
+          "dashboardproviders.yaml":
+            "apiVersion": 1
+            "providers":
+            - "name": "Observability"
+              "orgId": "1"
+              "type": "file"
+              "disableDeletion": false
+              "editable": true
+              "updateIntervalSeconds": 10
+              "options":
+                "path": "/etc/tyk-grafana/provisioning/dashboards/observability"
+            - "name": "SLO"
+              "orgId": "1"
+              "type": "file"
+              "disableDeletion": false
+              "editable": true
+              "updateIntervalSeconds": 10
+              "options":
+                "path": "/etc/tyk-grafana/provisioning/dashboards/slo"
+        "extraConfigmapMounts":
+        - "name": "grafana-observability-dashboards"
+          "mountPath": "/etc/tyk-grafana/provisioning/dashboards/observability/dashboard.json"
+          "subPath": "observability.json"
+          "configMap": "grafana-dashboards-configmap"
+          "readOnly": true
+        - "name": "grafana-slo-dashboards"
+          "mountPath": "/etc/tyk-grafana/provisioning/dashboards/slo/dashboard.json"
+          "subPath": "slo.json"
+          "configMap": "grafana-dashboards-configmap"
+          "readOnly": true
+        - "name": "tyk-opentelemetry-image-configmap"
+          "mountPath": "/usr/share/grafana/public/img/tyk-opentelemetry.png"
+          "subPath": "tyk-opentelemetry.png"
+          "configMap": "tyk-opentelemetry-image-configmap"
+          "readOnly": true
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: tyk
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

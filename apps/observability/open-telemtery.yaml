@@ -9,7 +9,7 @@ spec:
   source:
     repoURL: https://open-telemetry.github.io/opentelemetry-helm-charts
     chart: opentelemetry-collector
-    targetRevision: v0.90.1
+    targetRevision: v0.99.0
     helm:
       releaseName: tyk-otel-collector
       values: |
@@ -33,7 +33,7 @@ spec:
                 - replace_all_patterns(attributes, "value", "[^a-zA-Z0-9]", "_")
           exporters:
             otlp:
-              endpoint: "tyk-jaeger-collector.tyk.svc:14250"
+              endpoint: "tyk-jaeger-collector.tyk.svc:4317"
               tls: 
                 insecure: true
             prometheus:

@@ -2,19 +2,17 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: tyk-operator
+  name: apps
   namespace: argocd
 spec:
   project: default
   source:
-    repoURL: https://helm.tyk.io/public/helm/charts
-    chart: tyk-operator
-    targetRevision: v0.15.1
-    helm:
-      releaseName: tyk-operator
+    repoURL: https://github.com/TykTechnologies/tyk-argocd-demo.git
+    targetRevision: HEAD
+    path: resources/dependencies/apps
   destination:
     server: https://kubernetes.default.svc
-    namespace: tyk
+    namespace: apps
   syncPolicy:
     automated:
       prune: true

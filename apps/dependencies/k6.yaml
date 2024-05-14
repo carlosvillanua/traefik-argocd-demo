@@ -2,19 +2,23 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: tyk-jaeger-operator
+  name: k6-operator
   namespace: argocd
 spec:
   project: default
   source:
-    repoURL: https://jaegertracing.github.io/helm-charts
-    chart: jaeger-operator
-    targetRevision: v2.46.2
+    repoURL: https://grafana.github.io/helm-charts
+    chart: k6-operator
+    targetRevision: 3.8.0
     helm:
-      releaseName: tyk-jaeger-operator
+      parameters:
+        - name: namespace.create
+          value: "false"
+        - name: authProxy.enabled
+          value: "false"
   destination:
     server: https://kubernetes.default.svc
-    namespace: tyk
+    namespace: k6
   syncPolicy:
     automated:
       prune: true
@@ -25,17 +29,17 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: tyk-jaeger
+  name: k6-configmap
   namespace: argocd
 spec:
   project: default
   source:
     repoURL: https://github.com/TykTechnologies/tyk-argocd-demo.git
     targetRevision: HEAD
-    path: resources/observability/jaeger
+    path: resources/dependencies/k6
   destination:
     server: https://kubernetes.default.svc
-    namespace: tyk
+    namespace: k6
   syncPolicy:
     automated:
       prune: true

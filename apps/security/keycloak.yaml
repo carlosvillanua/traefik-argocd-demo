@@ -9,7 +9,7 @@ spec:
   source:
     repoURL: https://github.com/TykTechnologies/tyk-argocd-demo.git
     targetRevision: HEAD
-    path: resources/keycloak-operator
+    path: resources/security/keycloak/keycloak-operator
   destination:
     server: https://kubernetes.default.svc
     namespace: tyk
@@ -30,7 +30,7 @@ spec:
   source:
     repoURL: https://charts.bitnami.com/bitnami
     chart: postgresql
-    targetRevision: v13.2.3
+    targetRevision: v15.5.18
     helm:
       releaseName: keycloak-postgres
       values: |
@@ -57,7 +57,7 @@ spec:
   source:
     repoURL: https://github.com/TykTechnologies/tyk-argocd-demo.git
     targetRevision: HEAD
-    path: resources/keycloak
+    path: resources/security/keycloak/main
   destination:
     server: https://kubernetes.default.svc
     namespace: tyk

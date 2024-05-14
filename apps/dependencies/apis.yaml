@@ -2,20 +2,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: cert-manager
+  name: apis
   namespace: argocd
 spec:
   project: default
   source:
-    repoURL: https://charts.jetstack.io
-    chart: cert-manager
-    targetRevision: v1.10.1
-    helm:
-      releaseName: cert-manager
-      values: |
-        installCRDs: true
-        prometheus:
-          enabled: false
+    repoURL: https://github.com/TykTechnologies/tyk-argocd-demo.git
+    targetRevision: HEAD
+    path: resources/dependencies/apis
   destination:
     server: https://kubernetes.default.svc
     namespace: tyk

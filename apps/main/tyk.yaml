@@ -2,18 +2,16 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: tyk-cp-redis
+  name: tyk-redis
   namespace: argocd
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   source:
     repoURL: https://charts.bitnami.com/bitnami
     chart: redis-cluster
-    targetRevision: v10.0.1
+    targetRevision: v10.2.7
     helm:
-      releaseName: tyk-cp-redis
+      releaseName: tyk-redis
       values: |
         password: "topsecretpassword"
         redis:
@@ -31,18 +29,16 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: tyk-cp-postgres
+  name: tyk-postgres
   namespace: argocd
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   source:
     repoURL: https://charts.bitnami.com/bitnami
     chart: postgresql
-    targetRevision: v12.12.10
+    targetRevision: v15.5.18
     helm:
-      releaseName: tyk-cp-storage-postgres
+      releaseName: tyk-storage-postgres
       values: |
         auth:
           database: "storage"
@@ -60,40 +56,58 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: tyk-cp
+  name: tyk
   namespace: argocd
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   source:
     repoURL: https://helm.tyk.io/public/helm/charts
-    chart: tyk-control-plane
-    targetRevision: v1.4.0
+    chart: tyk-stack
+    targetRevision: v1.6.0
     helm:
-      releaseName: tyk-cp
+      releaseName: tyk
       values: |
         global:
           secrets:
-            useSecretName: "tyk-cp-conf"
+            useSecretName: "tyk-conf"
           adminUser: 
             email: "default@example.com"
             password: "topsecretpassword"
           storageType: "postgres"
           postgres:
-            host: "tyk-cp-storage-postgres-postgresql.tyk.svc"
+            host: "tyk-storage-postgres-postgresql.tyk.svc"
             port: 5432
             password: "topsecretpassword"
             database: "storage"
             sslmode: "disable"
           redis:
             addrs:
-            - "tyk-cp-redis-redis-cluster.tyk.svc:6379"
+            - "tyk-redis-redis-cluster.tyk.svc:6379"
             pass: "topsecretpassword"
             enableCluster: true
-        tyk-mdcb:
-          mdcb:
-            useSecretName: "tyk-cp-conf"
+        tyk-dashboard:
+          fullnameOverride: tyk-dashboard
+          dashboard:
+            tykApiHost: http://gateway-svc-tyk-gateway.tyk.svc
+        tyk-gateway:
+          fullnameOverride: tyk-gateway
+          gateway:
+            useDashboardAppConfig:
+              dashboardConnectionString: http://dashboard-svc-tyk-dashboard.tyk.svc:3000
+              policyConnectionString: http://dashboard-svc-tyk-dashboard.tyk.svc:3000
+            opentelemetry:
+              enabled: "true"
+              endpoint: "tyk-otel-collector-opentelemetry-collector.tyk.svc:4317"
+        tyk-pump:
+          fullnameOverride: tyk-pump
+          pump:
+            service:
+              enabled: true
+            backend:
+            - postgres
+            - prometheus
+            prometheusPump:
+              customMetrics: "[{\"name\": \"tyk_http_requests_total\",\"description\": \"Total of API requests\",\"metric_type\": \"counter\",\"labels\": [\"response_code\",\"api_name\",\"method\",\"api_key\",\"alias\",\"path\"]},{\"name\": \"tyk_http_latency\",\"description\": \"Latency of API requests\",\"metric_type\": \"histogram\",\"labels\": [\"type\",\"response_code\",\"api_name\",\"method\",\"api_key\",\"alias\",\"path\"]}]"
   destination:
     server: https://kubernetes.default.svc
     namespace: tyk

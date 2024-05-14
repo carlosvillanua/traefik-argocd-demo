@@ -4,14 +4,12 @@ kind: Application
 metadata:
   name: tyk-dp-redis
   namespace: argocd
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   source:
     repoURL: https://charts.bitnami.com/bitnami
     chart: redis-cluster
-    targetRevision: v10.0.1
+    targetRevision: v10.2.7
     helm:
       releaseName: tyk-dp-redis
       values: |
@@ -33,16 +31,14 @@ kind: Application
 metadata:
   name: tyk-dp
   namespace: argocd
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   source:
     repoURL: https://helm.tyk.io/public/helm/charts
     chart: tyk-data-plane
-    targetRevision: v1.4.0
+    targetRevision: v1.6.0
     helm:
-      releaseName: tyk-dp
+      releaseName: tyk
       values: |
         global:
           secrets:
@@ -58,10 +54,21 @@ spec:
             pass: "topsecretpassword"
             enableCluster: true
         tyk-gateway:
+          fullnameOverride: tyk-gateway
           gateway:
             opentelemetry:
               enabled: "true"
-              endpoint: "tyk-otel-collector-opentelemetry-collector.tyk.svc:4317"
+              endpoint: "tyk-otel-collector-opentelemetry-collector.tyk.svc.tyk.svc:4317"
+        tyk-pump:
+          fullnameOverride: tyk-pump
+          pump:
+            service:
+              enabled: true
+            backend:
+            - hybrid
+            - prometheus
+            prometheusPump:
+              customMetrics: "[{\"name\": \"tyk_http_requests_total\",\"description\": \"Total of API requests\",\"metric_type\": \"counter\",\"labels\": [\"response_code\",\"api_name\",\"method\",\"api_key\",\"alias\",\"path\"]},{\"name\": \"tyk_http_latency\",\"description\": \"Latency of API requests\",\"metric_type\": \"histogram\",\"labels\": [\"type\",\"response_code\",\"api_name\",\"method\",\"api_key\",\"alias\",\"path\"]}]"
   destination:
     server: https://kubernetes.default.svc
     namespace: tyk
