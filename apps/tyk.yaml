@@ -1,0 +1,115 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: tyk-redis
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+spec:
+  project: default
+  source:
+    repoURL: https://charts.bitnami.com/bitnami
+    chart: redis-cluster
+    targetRevision: v10.0.1
+    helm:
+      releaseName: tyk-redis
+      values: |
+        password: "topsecretpassword"
+        redis:
+          resourcesPreset: "none"
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: tyk
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: tyk-postgres
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+spec:
+  project: default
+  source:
+    repoURL: https://charts.bitnami.com/bitnami
+    chart: postgresql
+    targetRevision: v12.12.10
+    helm:
+      releaseName: tyk-storage-postgres
+      values: |
+        auth:
+          database: "storage"
+          postgresPassword: "topsecretpassword"
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: tyk
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: tyk
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+spec:
+  project: default
+  source:
+    repoURL: https://helm.tyk.io/public/helm/charts
+    chart: tyk-stack
+    targetRevision: v1.4.0
+    helm:
+      releaseName: tyk-gateway
+      values: |
+        global:
+          secrets:
+            useSecretName: "tyk-conf"
+          adminUser: 
+            email: "default@example.com"
+            password: "topsecretpassword"
+          storageType: "postgres"
+          postgres:
+            host: "tyk-storage-postgres-postgresql.tyk.svc"
+            port: 5432
+            password: "topsecretpassword"
+            database: "storage"
+            sslmode: "disable"
+          redis:
+            addrs:
+            - "tyk-redis-redis-cluster.tyk.svc:6379"
+            pass: "topsecretpassword"
+            enableCluster: true
+          tyk-gateway:
+            gateway:
+              extraEnvs:
+              - name: "TYK_GW_OPENTELEMETRY_ENABLED"
+                value: true
+              - name: "TYK_GW_OPENTELEMETRY_EXPORTER"
+                value: "grpc"
+              - name: "TYK_GW_OPENTELEMETRY_ENDPOINT"
+                value: "tyk-otel-collector-opentelemetry-collector:4317"
+          tyk-pump:
+            pump:
+              backend:
+              - postgres
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: tyk
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
