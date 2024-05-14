@@ -42,6 +42,15 @@ You can get the ArgoCD admin password by running the following command:
 kubectl get secrets -n argocd argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
 ```
 
+### Observability Tools
+
+Install observability tools using ArgoCD Application CRDs
+
+```
+kubectl apply -f apps/observability
+```
+
+
 ### Tyk
 
 Create secret with Tyk credentials:

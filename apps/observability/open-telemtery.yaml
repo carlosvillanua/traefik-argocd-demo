@@ -1,0 +1,98 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: tyk-otel-collector
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://open-telemetry.github.io/opentelemetry-helm-charts
+    chart: opentelemetry-collector
+    targetRevision: v0.90.1
+    helm:
+      releaseName: tyk-otel-collector
+      values: |
+        mode: "deployment"
+        image:
+          repository: "otel/opentelemetry-collector-contrib"
+        config:
+          receivers:
+            otlp:
+              protocols:
+                http:
+                  endpoint: "0.0.0.0:4318"
+                grpc:
+                  endpoint: "0.0.0.0:4317"
+          processors:
+            transform:
+              error_mode: ignore
+              metric_statements:
+              - context: "datapoint"
+                statements:
+                - replace_all_patterns(attributes, "value", "[^a-zA-Z0-9]", "_")
+          exporters:
+            otlp:
+              endpoint: "tyk-jaeger-collector.tyk.svc:14250"
+              tls: 
+                insecure: true
+            prometheus:
+              endpoint: "0.0.0.0:9464"
+          extensions:
+            pprof:
+              endpoint: ":1888"
+            zpages:
+              endpoint: ":55679"
+          connectors:
+            spanmetrics:
+              histogram:
+                explicit:
+                  buckets: 
+                  - "100us"
+                  - "1ms"
+                  - "2ms"
+                  - "6ms"
+                  - "10ms"
+                  - "100ms"
+                  - "250ms"
+              dimensions:
+                - name: "http.method"
+                - name: "http.status_code"
+                - name: "tyk.api.name"
+                - name: "tyk.gw.id"
+                - name: "service.version"
+          service:
+            pipelines:
+              traces:
+                receivers:
+                - "otlp"
+                processors:
+                - "batch"
+                exporters:
+                - "otlp"
+                - "spanmetrics"
+              metrics:
+                receivers:
+                - "spanmetrics"
+                processors:
+                - "transform"
+                exporters:
+                - "prometheus"
+        ports:
+          metrics:
+            enabled: true
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: tyk
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+
+#      service:
+#        extensions:
+#          - "pprof"
+#          - "zpages"
+#          - "health_check"

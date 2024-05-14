@@ -4,8 +4,6 @@ kind: Application
 metadata:
   name: tyk-prometheus
   namespace: argocd
-  annotations:
-    argocd.argoproj.io/sync-wave: "1"
 spec:
   project: default
   source:
@@ -15,18 +13,26 @@ spec:
     helm:
       releaseName: tyk-prometheus
       values: |
-        global:
-          scrape_interval: "5s"
-          evaluation_interval: "15s"
-        scrape_configs:
-          - job_name: "tyk-gateway"
-            static_configs:
-            - targets:
-              - 'tyk-otel-collector-opentelemetry-collector:9464'
-          - job_name: otel-collector
-            static_configs:
-            - targets:
-              - 'tyk-otel-collector-opentelemetry-collector:8888'
+        prometheus-pushgateway:
+          enabled: false
+        prometheus-node-exporter:
+          hostRootFsMount:
+            enabled: false
+        server:
+          global:
+            scrape_interval: "15s"
+            evaluation_interval: "15s"
+        serverFiles:
+          "prometheus.yml":
+            scrape_configs:
+            - job_name: "tyk-gateway"
+              static_configs:
+              - targets:
+                - 'prometheus-otel-collector-opentelemetry-collector:9464'
+            - job_name: otel-collector
+              static_configs:
+              - targets:
+                - 'tyk-otel-collector-opentelemetry-collector:8888'
   destination:
     server: https://kubernetes.default.svc
     namespace: tyk
@@ -37,11 +43,6 @@ spec:
     syncOptions:
       - CreateNamespace=true
 
-#  --set "prometheus-pushgateway.enabled=false" \
-#  --set "prometheus-node-exporter.hostRootFsMount.enabled=false" \
-#  --set "server.service.servicePort=$PROMETHEUS_SERVICE_PORT" \
-#  --set "server.global.scrape_interval=15s" \
-#  --set "server.global.evaluation_interval=15s" \
 #  --set "server.extraFlags={web.enable-lifecycle,web.enable-admin-api}" \
 #  --set "serverFiles.recording_rules\.yml.groups[0].name=tyk" \
 #  --set "serverFiles.recording_rules\.yml.groups[0].rules[0].record=task:http_response_error_count" \
