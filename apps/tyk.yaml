@@ -87,17 +87,14 @@ spec:
             enableCluster: true
           tyk-gateway:
             gateway:
-              extraEnvs:
-              - name: "TYK_GW_OPENTELEMETRY_ENABLED"
-                value: true
-              - name: "TYK_GW_OPENTELEMETRY_EXPORTER"
-                value: "grpc"
-              - name: "TYK_GW_OPENTELEMETRY_ENDPOINT"
-                value: "tyk-otel-collector-opentelemetry-collector:4317"
+              opentelemetry:
+                enabled: "true"
+                endpoint: "tyk-otel-collector-opentelemetry-collector:4317"
           tyk-pump:
             pump:
               backend:
               - postgres
+              - prometheus
   destination:
     server: https://kubernetes.default.svc
     namespace: tyk
