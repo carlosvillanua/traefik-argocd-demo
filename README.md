@@ -12,7 +12,7 @@ You can find instructions on how to run this on Minikube [here](https://github.c
 
 Choose between single cluster all-in-one deployment model or distributed deployment model.
 
-#### Tyk (Single cluster all-in-one deployment)
+#### Tyk Stack (Single cluster all-in-one deployment)
 
 Make sure you have the Tyk Dashboard license key ready and replace "<REPLACE_WITH_DASH_LICENSE>" with it in the command below.
 
@@ -34,7 +34,7 @@ Install Tyk using ArgoCD Application CRDs
 kubectl apply -f apps/dependencies
 kubectl apply -f apps/observability
 kubectl apply -f apps/security
-kubectl apply -f apps/main/tyk.yaml
+kubectl apply -f apps/main/tyk-stack.yaml
 ```
 
 You can expose the Tyk Dashboard and Gateway to your localhost using the following command:
