@@ -88,13 +88,19 @@ spec:
         tyk-dashboard:
           fullnameOverride: tyk-dashboard
           dashboard:
+            image:
+              tag: v5.6
             tykApiHost: http://gateway-svc-tyk-gateway.tyk.svc
         tyk-gateway:
           gateway:
+            image:
+              tag: v5.6
             useDashboardAppConfig:
               dashboardConnectionString: http://dashboard-svc-tyk-dashboard.tyk.svc
               policyConnectionString: http://dashboard-svc-tyk-dashboard.tyk.svc:3000
         tyk-mdcb:
+            image:
+              tag: v2.7
           mdcb:
             useSecretName: "tyk-cp-conf"
   destination:

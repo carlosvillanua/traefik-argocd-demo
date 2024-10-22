@@ -9,12 +9,10 @@ managing API authentication and authorization in k8s using OAuth2.0
 You can find instructions on how to run this on Minikube [here](https://github.com/TykTechnologies/tyk-argocd-demo/tree/main/docs/minikube.md). 
 
 ### Tyk
-
 Choose between single cluster all-in-one deployment model or distributed deployment model.
 
 #### Tyk Stack (Single cluster all-in-one deployment)
-
-Make sure you have the Tyk Dashboard license key ready and replace "<REPLACE_WITH_DASH_LICENSE>" with it in the command below.
+Make sure you have the Tyk Dashboard license key ready and replace "<REPLACE_WITH_LICENSE>" with it in the command below.
 
 Create secret with Tyk credentials:
 ```
@@ -25,7 +23,8 @@ kubectl create namespace tyk
 kubectl create secret generic tyk-conf --namespace=tyk \
    --from-literal=APISecret=CHANGEME \
    --from-literal=AdminSecret=12345 \
-   --from-literal=DashLicense=<REPLACE_WITH_DASH_LICENSE>
+   --from-literal=DashLicense=<REPLACE_WITH_LICENSE> \
+   --from-literal=OperatorLicense=<REPLACE_WITH_LICENSE>
 ```
 
 Install Tyk using ArgoCD Application CRDs

@@ -56,12 +56,16 @@ spec:
         tyk-gateway:
           fullnameOverride: tyk-gateway
           gateway:
+            image:
+              tag: v5.6
             opentelemetry:
               enabled: "true"
               endpoint: "tyk-otel-collector-opentelemetry-collector.tyk.svc.tyk.svc:4317"
         tyk-pump:
           fullnameOverride: tyk-pump
           pump:
+            image:
+              tag: v1.11
             service:
               enabled: true
             backend:

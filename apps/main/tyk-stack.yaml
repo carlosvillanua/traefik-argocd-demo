@@ -88,10 +88,14 @@ spec:
         tyk-dashboard:
           fullnameOverride: tyk-dashboard
           dashboard:
+            image:
+              tag: v5.6
             tykApiHost: http://gateway-svc-tyk-gateway.tyk.svc
         tyk-gateway:
           fullnameOverride: tyk-gateway
           gateway:
+            image:
+              tag: v5.6
             useDashboardAppConfig:
               dashboardConnectionString: http://dashboard-svc-tyk-dashboard.tyk.svc:3000
               policyConnectionString: http://dashboard-svc-tyk-dashboard.tyk.svc:3000
@@ -101,6 +105,8 @@ spec:
         tyk-pump:
           fullnameOverride: tyk-pump
           pump:
+            image:
+              tag: v1.11
             service:
               enabled: true
             backend:

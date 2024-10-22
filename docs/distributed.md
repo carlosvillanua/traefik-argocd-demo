@@ -1,6 +1,5 @@
 # Tyk (Distributed deployment)
-
-Make sure you have the Tyk Dashboard and MDCB license keys ready and replace "<REPLACE_WITH_DASH_LICENSE>" and "<REPLACE_WITH_MDCB_LICENSE>" with your actual keys in the command below.
+Make sure you have the Tyk and MDCB license keys ready and replace "<REPLACE_WITH_LICENSE>" and "<REPLACE_WITH_MDCB_LICENSE>" with your actual keys in the command below.
 
 First, install Tyk control plane.
 
@@ -9,7 +8,8 @@ Create secret with Tyk credentials:
 kubectl create secret generic tyk-cp-conf --namespace=tyk \
    --from-literal=APISecret=CHANGEME \
    --from-literal=AdminSecret=12345 \
-   --from-literal=DashLicense=<REPLACE_WITH_DASH_LICENSE> \
+   --from-literal=DashLicense=<REPLACE_WITH_LICENSE> \
+   --from-literal=OperatorLicense=<REPLACE_WITH_LICENSE> \
    --from-literal=MDCBLicense=<REPLACE_WITH_MDCB_LICENSE>
 ```
 
