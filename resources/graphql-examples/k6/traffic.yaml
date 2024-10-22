@@ -1,0 +1,94 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: k6-gql-traffic
+data:
+  load.js: |
+    import http from 'k6/http';
+    import { sleep } from 'k6';
+    import {randomIntBetween} from 'https://jslib.k6.io/k6-utils/1.2.0/index.js';
+
+    export const options = {
+        insecureSkipTLSVerify: true,
+        discardResponseBodies: true,
+        scenarios: {
+            sendSocialMedia: {
+                executor: 'constant-vus',
+                exec: 'sendSocialMedia',
+                vus: 100,
+                duration: '2h',
+            },
+            sendUsers: {
+                executor: 'constant-vus',
+                exec: 'sendUsers',
+                vus: 100,
+                duration: '2h',
+            },
+            sendStarWars: {
+                executor: 'constant-vus',
+                exec: 'sendStarWars',
+                vus: 100,
+                duration: '2h',
+            }
+        }
+    };
+    
+    export function sendStarWars(keys) {
+        var payload;
+        var params;
+        
+        const queries = [
+            'query { species(speciesID: ' + randomIntBetween(0, 40) + ') { name language } }',
+            'query { planet(planetID: ' + randomIntBetween(0, 60) + ') { name gravity diameter } }',
+            'query { person(persontID: ' + randomIntBetween(0, 60) + ') { name homeworld { name } birthYear } }',
+        ]
+        
+        payload = JSON.stringify({ query: queries[randomIntBetween(0, 2)] });
+        params = {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': keys[randomIntBetween(0, keys.length)]
+            }
+        };
+        
+        http.post('http://gateway-svc-tyk-gateway.tyk.svc:8080/star-wars', payload, params)
+        sleep(60);
+    }
+    
+    export function sendSocialMedia() {
+        var payload;
+        var params;
+        
+        // Runs 0-10, where 0 will return an error
+        payload = JSON.stringify({
+            query: 'query { user(id: ' + randomIntBetween(0, 10) + ') { name email posts { title body comments { name email body } } } }',
+        });
+        
+        params = {
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        };
+        
+        http.post('http://gateway-svc-tyk-gateway.tyk.svc:8080/social-media', payload, params)
+        sleep(60);
+    }
+    
+    export function sendUsers() {
+        var payload;
+        var params;
+        
+        // Runs 0-10, where 0 will return an error
+        payload = JSON.stringify({
+            query: 'query { user(id: ' + randomIntBetween(0, 10) + ') { name email username company { name } address { city } } }',
+        });
+        
+        params = {
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        };
+        
+        http.post('http://gateway-svc-tyk-gateway.tyk.svc:8080/users', payload, params)
+        sleep(randomIntBetween(10, 30));
+    }
