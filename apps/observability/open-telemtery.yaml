@@ -32,7 +32,7 @@ spec:
                 statements:
                 - replace_all_patterns(attributes, "value", "[^a-zA-Z0-9]", "_")
           exporters:
-            otlp:
+            otlp/jaeger:
               endpoint: "tyk-jaeger-collector.tyk.svc:4317"
               tls: 
                 insecure: true
@@ -75,7 +75,7 @@ spec:
                 processors:
                 - "batch"
                 exporters:
-                - "otlp"
+                - "otlp/jaeger"
                 - "spanmetrics"
               metrics:
                 receivers:
