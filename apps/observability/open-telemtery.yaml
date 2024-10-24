@@ -32,8 +32,8 @@ spec:
                 statements:
                 - replace_all_patterns(attributes, "value", "[^a-zA-Z0-9]", "_")
           exporters:
-            otlp/jaeger:
-              endpoint: "tyk-jaeger-collector.tyk.svc:4317"
+            otlp/tempo:
+              endpoint: "tyk-tempo.tyk.svc:4317"
               tls: 
                 insecure: true
             prometheus:
@@ -75,7 +75,7 @@ spec:
                 processors:
                 - "batch"
                 exporters:
-                - "otlp/jaeger"
+                - "otlp/tempo"
                 - "spanmetrics"
               metrics:
                 receivers:
