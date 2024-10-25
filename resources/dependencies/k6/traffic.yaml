@@ -12,6 +12,12 @@ data:
         insecureSkipTLSVerify: true,
         discardResponseBodies: true,
         scenarios: {
+            users: {
+                executor: 'constant-vus',
+                exec: 'users',
+                vus: 10,
+                duration: '2h',
+            },
             success: {
                 executor: 'constant-vus',
                 exec: 'success',
@@ -122,5 +128,10 @@ data:
                 http.post("http://gateway-svc-tyk-gateway.tyk.svc:8080/httpbin/response-headers", payload, params);
                 break;
         }
+        sleep(randomIntBetween(10, 30));
+    }
+
+    export function users() {
+        http.get("http://gateway-svc-tyk-gateway.tyk.svc:8080/users/" + randomIntBetween(1, 10));    
         sleep(randomIntBetween(10, 30));
     }
