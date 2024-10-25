@@ -7,7 +7,10 @@ data:
     {
       "info": {
         "title": "no-op",
-        "version": "1.0.0"
+        "version": "1.0.0",
+        "state": {
+          "internal": true
+        }
       },
       "openapi": "3.0.3",
       "components": {
@@ -30,6 +33,13 @@ data:
           "name": "no-op",
           "state": {
             "active": true
+          }
+        },
+        "middleware": {
+          "global": {
+            "trafficLogs": {
+              "enabled": true
+            }
           }
         },
         "server": {
