@@ -118,6 +118,14 @@ data:
         },
         "middleware": {
           "global": {
+            "pluginConfig": {
+              "data": {
+                "enabled": true,
+                "value": {
+                  "auth": "keycloak"
+                }
+              }
+            },
             "contextVariables": {
               "enabled": true
             },

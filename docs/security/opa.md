@@ -1,7 +1,33 @@
 ### OPA
 
-Adds an OPA rule to the dashboard API to enforce Keycloak JWT Authentication on OAS API "keycloak"
+Adds an OPA rule to the dashboard API to enforce Keycloak JWT Authentication on OAS APIs with "keycloak" value for auth in pluginConfig.
 
+```
+{
+  "x-tyk-api-gateway": {
+    "middleware": {
+      "global": {
+        "pluginConfig": {
+          "data": {
+            "enabled": true,
+              "value": {
+                "auth": "keycloak",
+                ...
+              }
+            }
+          }
+        },
+        ...
+      },
+      ...
+    },
+    ...
+  },
+  ...
+}
+```
+
+Rego rule applied:
 ```
 patch_request[x] {
    request_permission[_] == "apis"
