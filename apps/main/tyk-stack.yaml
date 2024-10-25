@@ -93,11 +93,11 @@ spec:
             tykApiHost: http://gateway-svc-tyk-gateway.tyk.svc
             extraEnvs:
               - name: TYK_DB_SECURITY_OPENPOLICY_ENABLED
-                value: true
+                value: "true"
               - name: TYK_DB_SECURITY_OPENPOLICY_ENABLEAPI
-                value: true
+                value: "true"
               - name: TYK_DB_SECURITY_OPENPOLICY_DEBUG
-                value: true
+                value: "true"
             extraVolumes:
               - name: opa-rules
                 configMap:

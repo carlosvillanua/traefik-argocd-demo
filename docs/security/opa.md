@@ -7,7 +7,7 @@ patch_request[x] {
    request_permission[_] == "apis"
    request_intent == "write"
    input.request.body["x-tyk-api-gateway"].info.name == "keycloak"
-   payload := {
+   x := {
       "components": {
          "securitySchemes": {
             "jwtAuth": {
