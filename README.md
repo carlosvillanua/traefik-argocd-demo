@@ -65,11 +65,13 @@ Please follow the instructions [here](https://github.com/TykTechnologies/tyk-arg
 ##### Observability Stack
 - [Prometheus](https://github.com/TykTechnologies/tyk-argocd-demo/tree/main/docs/observability/prometheus.md)
 - [Grafana](https://github.com/TykTechnologies/tyk-argocd-demo/tree/main/docs/observability/grafana.md)
-- [Jaeger](https://github.com/TykTechnologies/tyk-argocd-demo/tree/main/docs/observability/jaeger.md)
+- [Tempo](https://github.com/TykTechnologies/tyk-argocd-demo/tree/main/docs/observability/tempo.md)
+- [Loki](https://github.com/TykTechnologies/tyk-argocd-demo/tree/main/docs/observability/loki.md)
 
 Run a k6 load test to generate traffic to view in the above platforms.
 ```
 kubectl apply -f jobs/k6-traffic.yaml
 ```
 ##### Security Stack
+- [OPA](https://github.com/TykTechnologies/tyk-argocd-demo/tree/main/docs/security/opa.md)
 - [Keycloak](https://github.com/TykTechnologies/tyk-argocd-demo/tree/main/docs/security/keycloak.md)

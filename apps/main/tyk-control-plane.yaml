@@ -91,6 +91,21 @@ spec:
             image:
               tag: v5.6
             tykApiHost: http://gateway-svc-tyk-gateway.tyk.svc
+            extraEnvs:
+              - name: TYK_DB_SECURITY_OPENPOLICY_ENABLED
+                value: true
+              - name: TYK_DB_SECURITY_OPENPOLICY_ENABLEAPI
+                value: true
+              - name: TYK_DB_SECURITY_OPENPOLICY_DEBUG
+                value: true
+            extraVolumes:
+              - name: opa-rules
+                configMap:
+                  name: opa-rules
+            extraVolumeMounts:
+              - name: opa-rules
+                mountPath: /opt/tyk-dashboard/schemas/dashboard.rego
+                subPath: dashboard.rego
         tyk-gateway:
           gateway:
             image:

@@ -55,6 +55,6 @@ curl -L --insecure -s -X POST 'http://localhost:7000/realms/keycloak-oauth/proto
 
 You can access the httpbin Keycloak managed api using the following curl command:
 ```
-curl -L --insecure -s -X POST 'http://localhost:8080/httpbin-jwt/get' \
+curl -L --insecure -s -X POST 'http://localhost:8080/keycloak/get' \
    -H 'Authorization: $JWT'
 ```
