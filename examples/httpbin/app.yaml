@@ -1,8 +1,35 @@
 ---
+apiVersion: tyk.tyk.io/v1alpha1
+kind: TykOasApiDefinition
+metadata:
+  name: httpbin
+  namespace: tyk
+spec:
+  tykOAS:
+    configmapRef:
+      name: httpbin
+      keyName: httpbin.json
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: httpbin-svc
+  namespace: tyk
+  labels:
+    app: httpbin
+spec:
+  ports:
+    - name: http
+      port: 8000
+      targetPort: 8080
+  selector:
+    app: httpbin
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: httpbin
+  namespace: tyk
 spec:
   replicas: 1
   selector:
@@ -29,17 +56,3 @@ spec:
                 - ALL
             seccompProfile:
               type: RuntimeDefault
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: httpbin-svc
-  labels:
-    app: httpbin
-spec:
-  ports:
-    - name: http
-      port: 8000
-      targetPort: 8080
-  selector:
-    app: httpbin

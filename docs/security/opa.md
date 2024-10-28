@@ -32,7 +32,7 @@ Rego rule applied:
 patch_request[x] {
    request_permission[_] == "apis"
    request_intent == "write"
-   input.request.body["x-tyk-api-gateway"].info.name == "keycloak"
+   input.request.body["x-tyk-api-gateway"].middleware.global.pluginConfig.data.value.auth == "keycloak"
    x := {
       "components": {
          "securitySchemes": {
@@ -61,18 +61,9 @@ patch_request[x] {
                      "identityBaseField": "sub",
                      "policyFieldName": "pol",
                      "enabled": true,
-                     "defaultPolicies": [ "dHlrL25vLW9w" ], 
-                     "scopes": { 
-                        "claimName": "group", 
-                        "scopeToPolicyMapping": [ { 
-                           "scope": "admins", 
-                           "policyId": "dHlrL2tleWNsb2FrLWFkbWlucw" }, { 
-                           "scope": "developers", 
-                           "policyId": "dHlrL2tleWNsb2FrLWRldmVsb3BlcnM" 
-                        } ] 
-                     }, 
+                     "defaultPolicies": [ "dHlrL3VzZXJz" ],
                      "signingMethod": "rsa", 
-                     "source": "http://keycloak-service.tyk.svc:7000/realms/keycloak-oauth/protocol/openid-connect/certs"
+                     "source": "aHR0cDovL2tleWNsb2FrLXNlcnZpY2UudHlrLnN2Yzo3MDAwL3JlYWxtcy9rZXljbG9hay1vYXV0aC9wcm90b2NvbC9vcGVuaWQtY29ubmVjdC9jZXJ0cw=="
                   }
                }
             } 

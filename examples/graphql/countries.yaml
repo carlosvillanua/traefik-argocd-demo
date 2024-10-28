@@ -3,8 +3,9 @@ apiVersion: tyk.tyk.io/v1alpha1
 kind: ApiDefinition
 metadata:
   name: countries
+  namespace: tyk
 spec:
-  name: Countries
+  name: countries
   protocol: http
   active: true
   proxy:
@@ -26,6 +27,7 @@ spec:
 
       type Query {
         countries: [Country]
+        country(code: ID!): Country
       }
 
       type RestCountry {
@@ -44,6 +46,11 @@ spec:
           path:
             - "countries"
           type_name: Query
+        - disable_default_mapping: false
+          field_name: country
+          path:
+            - "country"
+          type_name: Query
         - disable_default_mapping: true
           field_name: restCountry
           path: []
@@ -56,6 +63,18 @@ spec:
             - type: Query
               fields:
                 - "countries"
+          config:
+            url: "https://countries.trevorblades.com/"
+            method: "POST"
+            headers: {}
+            body: ""
+        - kind: "GraphQL"
+          name: "country"
+          internal: false
+          root_fields:
+            - type: Query
+              fields:
+                - "country"
           config:
             url: "https://countries.trevorblades.com/"
             method: "POST"

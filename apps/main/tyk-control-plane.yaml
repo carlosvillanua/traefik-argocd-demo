@@ -43,6 +43,10 @@ spec:
         auth:
           database: "storage"
           postgresPassword: "topsecretpassword"
+        primary:
+          persistentVolumeClaimRetentionPolicy:
+            enabled: true
+            whenDeleted: Delete
   destination:
     server: https://kubernetes.default.svc
     namespace: tyk
@@ -92,6 +96,8 @@ spec:
               tag: v5.6
             tykApiHost: http://gateway-svc-tyk-gateway.tyk.svc
             extraEnvs:
+              - name: TYK_DB_SECURITY_ALLOWADMINRESETPASSWORD
+                value: "true"
               - name: TYK_DB_SECURITY_OPENPOLICY_ENABLED
                 value: true
               - name: TYK_DB_SECURITY_OPENPOLICY_ENABLEAPI

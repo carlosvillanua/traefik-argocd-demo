@@ -2,6 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: users
+  namespace: tyk
 data:
   users.json: |-
     {
@@ -10,36 +11,6 @@ data:
         "title": "Users",
         "description": "API to manage user data.",
         "version": "1.0.0"
-      },
-      "x-tyk-api-gateway": {
-        "info": {
-          "name": "users",
-          "state": {
-            "active": true
-          }
-        },
-        "middleware": {
-          "global": {
-            "trafficLogs": {
-              "enabled": true
-            }
-          }
-        },
-        "server": {
-          "detailedActivityLogs": {
-            "enabled": true
-          },
-          "detailedTracing": {
-            "enabled": true
-          },
-          "listenPath": {
-            "strip": false,
-            "value": "/users"
-          }
-        },
-        "upstream": {
-          "url": "http://users-rest-svc.apps.svc:3101/"
-        }
       },
       "paths": {
         "/users": {
@@ -180,15 +151,43 @@ data:
             }
           }
         }
+      },
+      "x-tyk-api-gateway": {
+        "info": {
+          "name": "users",
+          "state": {
+            "active": true
+          }
+        },
+        "middleware": {
+          "global": {
+            "pluginConfig": {
+              "data": {
+                "enabled": true,
+                "value": {
+                  "auth": "keycloak"
+                }
+              }
+            },
+            "trafficLogs": {
+              "enabled": true
+            }
+          }
+        },
+        "server": {
+          "detailedActivityLogs": {
+            "enabled": true
+          },
+          "detailedTracing": {
+            "enabled": true
+          },
+          "listenPath": {
+            "strip": false,
+            "value": "/users"
+          }
+        },
+        "upstream": {
+          "url": "http://users-rest-svc.tyk.svc:3101/"
+        }
       }
     }
----
-apiVersion: tyk.tyk.io/v1alpha1
-kind: TykOasApiDefinition
-metadata:
-  name: users
-spec:
-  tykOAS:
-    configmapRef:
-      name: users
-      keyName: users.json

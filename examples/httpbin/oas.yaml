@@ -2,6 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: httpbin
+  namespace: tyk
 data:
   httpbin.json: |-
     {
@@ -39,17 +40,7 @@ data:
           }
         },
         "upstream": {
-          "url": "http://httpbin-svc.apps.svc:8000"
+          "url": "http://httpbin-svc.tyk.svc:8000"
         }
       }
     }
----
-apiVersion: tyk.tyk.io/v1alpha1
-kind: TykOasApiDefinition
-metadata:
-  name: httpbin
-spec:
-  tykOAS:
-    configmapRef:
-      name: httpbin
-      keyName: httpbin.json
