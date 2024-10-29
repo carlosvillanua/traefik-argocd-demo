@@ -16,13 +16,13 @@ data:
             sendSocialMedia: {
                 executor: 'constant-vus',
                 exec: 'sendSocialMedia',
-                vus: 5,
+                vus: 10,
                 duration: '2h',
             },
             sendStarWars: {
                 executor: 'constant-vus',
                 exec: 'sendStarWars',
-                vus: 5,
+                vus: 10,
                 duration: '2h',
             }
         }
@@ -68,7 +68,7 @@ data:
         const queries = [
             'query { species(speciesID: ' + randomIntBetween(0, 40) + ') { name language } }',
             'query { planet(planetID: ' + randomIntBetween(0, 60) + ') { name gravity diameter } }',
-            'query { person(persontID: ' + randomIntBetween(0, 60) + ') { name homeworld { name } birthYear } }',
+            'query { person(personID: ' + randomIntBetween(0, 60) + ') { name homeworld { name } birthYear } }',
         ]
         
         payload = JSON.stringify({ query: queries[randomIntBetween(0, 2)] });

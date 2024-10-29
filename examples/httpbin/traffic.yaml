@@ -16,31 +16,31 @@ data:
             success: {
                 executor: 'constant-vus',
                 exec: 'success',
-                vus: 1,
+                vus: 5,
                 duration: '2h',
             },
             failure: {
                 executor: 'constant-vus',
                 exec: 'error',
-                vus: 1,
+                vus: 5,
                 duration: '2h',
             },
             differentPath: {
                 executor: 'constant-vus',
                 exec: 'differentPath',
-                vus: 1,
+                vus: 5,
                 duration: '2h',
             },
             differentMethod: {
                 executor: 'constant-vus',
                 exec: 'differentMethod',
-                vus: 1,
+                vus: 5,
                 duration: '2h',
             },
             breakingSlo: {
                 executor: 'per-vu-iterations',
                 exec: 'breakingSlo',
-                vus: 1,
+                vus: 5,
                 iterations: 500,
                 maxDuration: '2h',
             }
