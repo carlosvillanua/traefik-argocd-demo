@@ -73,7 +73,8 @@ Please follow the instructions [here](https://github.com/TykTechnologies/tyk-arg
 - [Keycloak](https://github.com/TykTechnologies/tyk-argocd-demo/tree/main/docs/security/keycloak.md)
 
 #### Examples
-Examples folder contains different API examples and traffic generating k6 traffic.
+Examples folder contains yaml files for deployments, API configuration and traffic generation k6 scripts. Checkout the
+[docs](https://github.com/TykTechnologies/tyk-argocd-demo/tree/main/docs/examples/) folder to find out more about what each of these examples contain.
 
 ```
 kubectl apply -R -f examples/
