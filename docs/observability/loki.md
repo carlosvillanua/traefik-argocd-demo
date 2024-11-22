@@ -1,3 +1,3 @@
 ### Loki
 
-You can also use Grafana to view the logs. 
+You can use Grafana to view the logs. 
