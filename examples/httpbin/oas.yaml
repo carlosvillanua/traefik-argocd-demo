@@ -15,7 +15,7 @@ data:
       "paths": {},
       "x-tyk-api-gateway": {
         "info": {
-          "name": "httpbin",
+          "name": "HR API",
           "state": {
             "active": true
           }
@@ -36,7 +36,7 @@ data:
           },
           "listenPath": {
             "strip": true,
-            "value": "/httpbin/"
+            "value": "/hrapi/"
           }
         },
         "upstream": {
