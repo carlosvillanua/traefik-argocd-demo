@@ -52,7 +52,7 @@ spec:
             - name: OTEL_SERVICE_NAME
               value: "HttpBin"
             - name: OTEL_EXPORTER_OTLP_ENDPOINT
-              value: "http://tyk-otel-collector-opentelemetry-collector.tyk.svc:4318"
+              value: "http://tyk-otel-collector-opentelemetry-collector.tyk.svc:4317"
           securityContext:
             runAsNonRoot: false  # Changed from true to false
             allowPrivilegeEscalation: false
