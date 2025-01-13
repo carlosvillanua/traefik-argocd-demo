@@ -43,11 +43,16 @@ spec:
         version: v1
     spec:
       containers:
-        - image: zalbiraw/go-httpbin
+        - image: carlostyk/httpbin-otel
           imagePullPolicy: IfNotPresent
           name: httpbin
           ports:
             - containerPort: 8080
+          env:
+            - name: OTEL_SERVICE_NAME
+              value: "HttpBin"
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              value: "http://tyk-otel-collector-opentelemetry-collector.tyk.svc:4318"
           securityContext:
             runAsNonRoot: true
             allowPrivilegeEscalation: false
