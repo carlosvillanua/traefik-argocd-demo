@@ -15,7 +15,7 @@ data:
       "paths": {},
       "x-tyk-api-gateway": {
         "info": {
-          "name": "HR API",
+          "name": "Httpbin",
           "state": {
             "active": true
           }
