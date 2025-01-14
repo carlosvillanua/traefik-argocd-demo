@@ -15,7 +15,7 @@ data:
       "paths": {},
       "x-tyk-api-gateway": {
         "info": {
-          "name": "Ita2",
+          "name": "ItaFinalAPI",
           "state": {
             "active": true
           }
