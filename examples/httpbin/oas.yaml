@@ -15,7 +15,7 @@ data:
       "paths": {},
       "x-tyk-api-gateway": {
         "info": {
-          "name": "Httpbin",
+          "name": "Ita2",
           "state": {
             "active": true
           }
