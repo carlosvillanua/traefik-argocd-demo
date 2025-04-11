@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://helm.traefik.io/traefik
     chart: traefik
-    targetRevision: 23.0.0
+    targetRevision: 34.4.0
     helm:
       values: |
         ingressRoute:
@@ -17,7 +17,10 @@ spec:
             matchRule: Host(`dashboard.docker.localhost`)  # Custom host rule
             entryPoints:
               - web  # Explicit entry point assignment
-        
+        image:
+          registry: ghcr.io
+          repository: traefik/traefik
+          tag: v3.3.5
         metrics:
           prometheus: null
           otlp:
