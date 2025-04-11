@@ -1,14 +1,21 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: traefik-ingress
+  name: traefik
   namespace: argocd
 spec:
   project: default
   source:
-    repoURL: https://github.com/carlosvillanua/traefik-argocd-demo.git
-    targetRevision: HEAD
-    path: apps/main/traefik-manifests
+    repoURL: https://helm.traefik.io/traefik
+    chart: traefik
+    targetRevision: 23.0.0  # Specify your desired version
+    helm:
+      values: |
+        ingressRoute:
+          dashboard:
+            enabled: true
+        service:
+          type: ClusterIP
   destination:
     server: https://kubernetes.default.svc
     namespace: traefik
@@ -18,3 +25,4 @@ spec:
       prune: true
     syncOptions:
       - CreateNamespace=true
+
