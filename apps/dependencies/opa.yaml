@@ -7,7 +7,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/traefik-workshops/traefik-argocd-demo.git
+    repoURL: https://github.com/carlosvillanua/traefik-argocd-demo.git
     targetRevision: HEAD
     path: resources/security/opa
   destination:
