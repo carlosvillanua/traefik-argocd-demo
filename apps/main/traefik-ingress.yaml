@@ -8,14 +8,39 @@ spec:
   source:
     repoURL: https://helm.traefik.io/traefik
     chart: traefik
-    targetRevision: 23.0.0  # Specify your desired version
+    targetRevision: 23.0.0
     helm:
       values: |
         ingressRoute:
           dashboard:
             enabled: true
-        service:
-          type: ClusterIP
+            matchRule: Host(`dashboard.docker.localhost`)  # Custom host rule
+            entryPoints:
+              - web  # Explicit entry point assignment
+        
+        metrics:
+          prometheus: null
+          otlp:
+            enabled: true
+            http:
+              enabled: true
+              endpoint: http://traefik-otel-collector-opentelemetry-collector.traefik.svc:4318/v1/metrics
+        
+        tracing:
+          otlp:
+            enabled: true
+            http:
+              enabled: true
+              endpoint: http://traefik-otel-collector-opentelemetry-collector.traefik.svc:4318/v1/traces
+        
+        providers:
+          kubernetesCRD:
+            namespaces:
+              - traefik
+        
+        globalArguments:
+          - "--entrypoints.web.address=:80"  # Ensure web entrypoint exists
+        
   destination:
     server: https://kubernetes.default.svc
     namespace: traefik
