@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://github.com/carlosvillanua/traefik-argocd-demo.git
     targetRevision: HEAD
-    path: traefik-manifests
+    path: apps/main/traefik-manifests
   destination:
     server: https://kubernetes.default.svc
     namespace: traefik
