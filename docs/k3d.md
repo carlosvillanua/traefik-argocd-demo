@@ -1,14 +1,12 @@
-# Minikube
+# Create a Kubernetes cluster using k3d
 
-Start Minikube
 ```
-minikube start
-minikube addons enable ingress
+k3d cluster create traefik-hub --port 80:80@loadbalancer --port 443:443@loadbalancer --port 8000:8000@loadbalancer --k3s-arg "--disable=traefik@server:0"
 ```
 
 # ArgoCD
 
-Install ArgoCD on Minikube
+Install ArgoCD on k3d
 
 ```
 kubectl create namespace argocd

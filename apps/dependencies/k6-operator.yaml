@@ -18,7 +18,7 @@ spec:
           value: "false"
   destination:
     server: https://kubernetes.default.svc
-    namespace: tyk
+    namespace: Traefik
   syncPolicy:
     automated:
       prune: true

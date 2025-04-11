@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: tyk-loki-stack
+  name: traefik-loki-stack
   namespace: argocd
 spec:
   project: default
@@ -11,10 +11,10 @@ spec:
     chart: loki-stack
     targetRevision: 2.10.2
     helm:
-      releaseName: tyk-loki-stack
+      releaseName: traefik-loki-stack
   destination:
     server: https://kubernetes.default.svc
-    namespace: tyk
+    namespace: traefik
   syncPolicy:
     automated:
       prune: true

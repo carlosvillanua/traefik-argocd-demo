@@ -7,12 +7,12 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/TykTechnologies/tyk-argocd-demo.git
+    repoURL: https://github.com/traefik-workshops/traefik-argocd-demo.git
     targetRevision: HEAD
     path: resources/observability/grafana
   destination:
     server: https://kubernetes.default.svc
-    namespace: tyk
+    namespace: traefik
   syncPolicy:
     automated:
       prune: true
@@ -23,7 +23,7 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: tyk-grafana
+  name: traefik-grafana
   namespace: argocd
 spec:
   project: default
@@ -32,7 +32,7 @@ spec:
     chart: grafana
     targetRevision: v8.5.8
     helm:
-      releaseName: tyk-grafana
+      releaseName: traefik-grafana
       values: |
         adminPassword: topsecretpassword
         datasources:
@@ -41,17 +41,17 @@ spec:
             datasources:
             - name: "Prometheus"
               type: "prometheus"
-              url: "http://tyk-prometheus-server:80"
+              url: "http://traefik-prometheus-server:80"
               access: "proxy"
               isDefault: true
             - name: "Tempo"
               type: "tempo"
-              url: "http://tyk-tempo:3100"
+              url: "http://traefik-tempo:3100"
               access: "proxy"
               isDefault: false
             - name: "Loki"
               type: "loki"
-              url: "http://tyk-loki-stack:3100"
+              url: "http://traefik-loki-stack:3100"
               access: "proxy"
               isDefault: false
         dashboardProviders:
@@ -65,7 +65,7 @@ spec:
               "editable": true
               "updateIntervalSeconds": 10
               "options":
-                "path": "/etc/tyk-grafana/provisioning/dashboards/observability"
+                "path": "/etc/traefik-grafana/provisioning/dashboards/observability"
             - "name": "SLO"
               "orgId": "1"
               "type": "file"
@@ -73,26 +73,25 @@ spec:
               "editable": true
               "updateIntervalSeconds": 10
               "options":
-                "path": "/etc/tyk-grafana/provisioning/dashboards/slo"
+                "path": "/etc/traefik-grafana/provisioning/dashboards/slo"
         "extraConfigmapMounts":
         - "name": "grafana-observability-dashboards"
-          "mountPath": "/etc/tyk-grafana/provisioning/dashboards/observability/dashboard.json"
+          "mountPath": "/etc/traefik-grafana/provisioning/dashboards/observability/dashboard.json"
           "subPath": "observability.json"
           "configMap": "grafana-dashboards-configmap"
           "readOnly": true
         - "name": "grafana-slo-dashboards"
-          "mountPath": "/etc/tyk-grafana/provisioning/dashboards/slo/dashboard.json"
+          "mountPath": "/etc/traefik-grafana/provisioning/dashboards/slo/dashboard.json"
           "subPath": "slo.json"
           "configMap": "grafana-dashboards-configmap"
           "readOnly": true
-        - "name": "tyk-opentelemetry-image-configmap"
-          "mountPath": "/usr/share/grafana/public/img/tyk-opentelemetry.png"
-          "subPath": "tyk-opentelemetry.png"
-          "configMap": "tyk-opentelemetry-image-configmap"
+        - "name": "traefik-opentelemetry-image-configmap"
+          "subPath": "traefik-opentelemetry.png"
+          "configMap": "traefik-opentelemetry-image-configmap"
           "readOnly": true
   destination:
     server: https://kubernetes.default.svc
-    namespace: tyk
+    namespace: traefik
   syncPolicy:
     automated:
       prune: true

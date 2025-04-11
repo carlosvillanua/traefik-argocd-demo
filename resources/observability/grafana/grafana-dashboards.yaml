@@ -52,7 +52,7 @@ data:
               "showLineNumbers": false,
               "showMiniMap": false
             },
-            "content": "<h3>API Observability</h3>\npowered by<br /> \nTyk & OpenTelemetry<br />\n\n<img width= \"170\" src=\"/public/img/tyk-opentelemetry.png\" />\n<br />\n🔗 <a href=\"http://localhost:16686/\" target=\"_blank\">Distributed traces in Jaeger</a>",
+            "content": "<h3>API Observability</h3>\npowered by<br /> \ntraefik & OpenTelemetry<br />\n\n<img width= \"170\" src=\"/public/img/traefik-opentelemetry.png\" />\n<br />\n🔗 <a href=\"http://localhost:16686/\" target=\"_blank\">Distributed traces in Jaeger</a>",
             "mode": "markdown"
           },
           "pluginVersion": "10.2.2",
@@ -188,7 +188,7 @@ data:
                 "uid": "PBFA97CFB590B2093"
               },
               "editorMode": "code",
-              "expr": "sum(rate(calls_total{span_kind=\"SPAN_KIND_SERVER\",tyk_api_name=~\"$tykapiname\",service_name=\"tyk\"}[1m])) or vector(0)\n",
+              "expr": "sum(rate(calls_total{span_kind=\"SPAN_KIND_SERVER\",traefik_api_name=~\"$traefikapiname\",service_name=\"traefik\"}[1m])) or vector(0)\n",
               "legendFormat": "Requests",
               "range": true,
               "refId": "A"
@@ -199,7 +199,7 @@ data:
                 "uid": "PBFA97CFB590B2093"
               },
               "editorMode": "code",
-              "expr": "sum(rate(calls_total{span_kind=\"SPAN_KIND_SERVER\",http_status_code=~\"[5][0-9]{2}\",tyk_api_name=~\"$tykapiname\",service_name=\"tyk\"}[1m])) or vector(0)\n\n",
+              "expr": "sum(rate(calls_total{span_kind=\"SPAN_KIND_SERVER\",http_status_code=~\"[5][0-9]{2}\",traefik_api_name=~\"$traefikapiname\",service_name=\"traefik\"}[1m])) or vector(0)\n\n",
               "hide": false,
               "legendFormat": "Server-side errors",
               "range": true,
@@ -211,7 +211,7 @@ data:
                 "uid": "PBFA97CFB590B2093"
               },
               "editorMode": "code",
-              "expr": "sum(rate(calls_total{span_kind=\"SPAN_KIND_SERVER\",http_status_code=~\"[4][0-9]{2}\",tyk_api_name=~\"$tykapiname\",service_name=\"tyk\"}[1m])) or vector(0)\n\n",
+              "expr": "sum(rate(calls_total{span_kind=\"SPAN_KIND_SERVER\",http_status_code=~\"[4][0-9]{2}\",traefik_api_name=~\"$traefikapiname\",service_name=\"traefik\"}[1m])) or vector(0)\n\n",
               "hide": false,
               "legendFormat": "Client-side errors",
               "range": true,
@@ -305,7 +305,7 @@ data:
               },
               "editorMode": "code",
               "exemplar": false,
-              "expr": "histogram_quantile(0.99, sum(rate(duration_milliseconds_bucket{span_kind=\"SPAN_KIND_SERVER\",tyk_api_name=~\"$tykapiname\",service_name=\"tyk\"}[1m])) by (le)) or vector(0)",
+              "expr": "histogram_quantile(0.99, sum(rate(duration_milliseconds_bucket{span_kind=\"SPAN_KIND_SERVER\",traefik_api_name=~\"$traefikapiname\",service_name=\"traefik\"}[1m])) by (le)) or vector(0)",
               "hide": false,
               "instant": false,
               "legendFormat": "Duration (p99)",
@@ -415,7 +415,7 @@ data:
                 "uid": "PBFA97CFB590B2093"
               },
               "editorMode": "code",
-              "expr": "sum by (http_status_code) (\n  rate(calls_total{span_kind=\"SPAN_KIND_SERVER\",tyk_api_name=~\"$tykapiname\",service_name=\"tyk\"}[1m])\n)",
+              "expr": "sum by (http_status_code) (\n  rate(calls_total{span_kind=\"SPAN_KIND_SERVER\",traefik_api_name=~\"$traefikapiname\",service_name=\"traefik\"}[1m])\n)",
               "legendFormat": "__auto",
               "range": true,
               "refId": "A"
@@ -514,7 +514,7 @@ data:
                 "uid": "PBFA97CFB590B2093"
               },
               "editorMode": "code",
-              "expr": "sum by (http_method) (\n  rate(calls_total{span_kind=\"SPAN_KIND_SERVER\",tyk_api_name=~\"$tykapiname\",service_name=\"tyk\"}[1m])\n)",
+              "expr": "sum by (http_method) (\n  rate(calls_total{span_kind=\"SPAN_KIND_SERVER\",traefik_api_name=~\"$traefikapiname\",service_name=\"traefik\"}[1m])\n)",
               "legendFormat": "__auto",
               "range": true,
               "refId": "A"
@@ -622,7 +622,7 @@ data:
                 "uid": "PBFA97CFB590B2093"
               },
               "editorMode": "code",
-              "expr": "histogram_quantile(0.99, sum(rate(duration_milliseconds_bucket{span_kind=\"SPAN_KIND_SERVER\",tyk_api_name=~\"$tykapiname\",service_name=\"tyk\"}[1m])) by (le))",
+              "expr": "histogram_quantile(0.99, sum(rate(duration_milliseconds_bucket{span_kind=\"SPAN_KIND_SERVER\",traefik_api_name=~\"$traefikapiname\",service_name=\"traefik\"}[1m])) by (le))",
               "legendFormat": "p99",
               "range": true,
               "refId": "A"
@@ -633,7 +633,7 @@ data:
                 "uid": "PBFA97CFB590B2093"
               },
               "editorMode": "code",
-              "expr": "histogram_quantile(0.95, sum(rate(duration_milliseconds_bucket{span_kind=\"SPAN_KIND_SERVER\",tyk_api_name=~\"$tykapiname\"}[1m])) by (le))",
+              "expr": "histogram_quantile(0.95, sum(rate(duration_milliseconds_bucket{span_kind=\"SPAN_KIND_SERVER\",traefik_api_name=~\"$traefikapiname\"}[1m])) by (le))",
               "hide": false,
               "legendFormat": "p95",
               "range": true,
@@ -645,7 +645,7 @@ data:
                 "uid": "PBFA97CFB590B2093"
               },
               "editorMode": "code",
-              "expr": "histogram_quantile(0.90, sum(rate(duration_milliseconds_bucket{span_kind=\"SPAN_KIND_SERVER\",tyk_api_name=~\"$tykapiname\"}[1m])) by (le))",
+              "expr": "histogram_quantile(0.90, sum(rate(duration_milliseconds_bucket{span_kind=\"SPAN_KIND_SERVER\",traefik_api_name=~\"$traefikapiname\"}[1m])) by (le))",
               "hide": false,
               "legendFormat": "p90",
               "range": true,
@@ -727,7 +727,7 @@ data:
                 "uid": "PBFA97CFB590B2093"
               },
               "editorMode": "code",
-              "expr": "histogram_quantile(0.99, sum(rate(duration_milliseconds_bucket{span_kind=\"SPAN_KIND_SERVER\",tyk_api_name=~\"$tykapiname\",service_name=\"tyk\"}[1m])) by (le, span_name))",
+              "expr": "histogram_quantile(0.99, sum(rate(duration_milliseconds_bucket{span_kind=\"SPAN_KIND_SERVER\",traefik_api_name=~\"$traefikapiname\",service_name=\"traefik\"}[1m])) by (le, span_name))",
               "legendFormat": "__auto",
               "range": true,
               "refId": "A"
@@ -853,7 +853,7 @@ data:
                 "uid": "PBFA97CFB590B2093"
               },
               "editorMode": "code",
-              "expr": "count(count(calls_total{span_kind=\"SPAN_KIND_SERVER\",tyk_api_name=~\"$tykapiname\",service_name=\"tyk\"}) by (tyk_gw_id))\n",
+              "expr": "count(count(calls_total{span_kind=\"SPAN_KIND_SERVER\",traefik_api_name=~\"$traefikapiname\",service_name=\"traefik\"}) by (traefik_gw_id))\n",
               "legendFormat": "Number of API gateways",
               "range": true,
               "refId": "A"
@@ -948,7 +948,7 @@ data:
                 "uid": "PBFA97CFB590B2093"
               },
               "editorMode": "code",
-              "expr": "sum by (tyk_gw_id) (\n  rate(calls_total{span_kind=\"SPAN_KIND_SERVER\",tyk_api_name=~\"$tykapiname\", service_name=\"tyk\"}[1m])\n)",
+              "expr": "sum by (traefik_gw_id) (\n  rate(calls_total{span_kind=\"SPAN_KIND_SERVER\",traefik_api_name=~\"$traefikapiname\", service_name=\"traefik\"}[1m])\n)",
               "legendFormat": "__auto",
               "range": true,
               "refId": "A"
@@ -1060,7 +1060,7 @@ data:
                 "uid": "PBFA97CFB590B2093"
               },
               "editorMode": "code",
-              "expr": "count(count(calls_total{span_kind=\"SPAN_KIND_SERVER\",tyk_api_name=~\"$tykapiname\",service_name=\"tyk\"}) by (service_version))\n",
+              "expr": "count(count(calls_total{span_kind=\"SPAN_KIND_SERVER\",traefik_api_name=~\"$traefikapiname\",service_name=\"traefik\"}) by (service_version))\n",
               "legendFormat": "API gateway versions",
               "range": true,
               "refId": "A"
@@ -1155,7 +1155,7 @@ data:
                 "uid": "PBFA97CFB590B2093"
               },
               "editorMode": "code",
-              "expr": "sum by (service_version) (\n  rate(calls_total{span_kind=\"SPAN_KIND_SERVER\",tyk_api_name=~\"$tykapiname\", service_name=\"tyk\"}[1m])\n)",
+              "expr": "sum by (service_version) (\n  rate(calls_total{span_kind=\"SPAN_KIND_SERVER\",traefik_api_name=~\"$traefikapiname\", service_name=\"traefik\"}[1m])\n)",
               "legendFormat": "__auto",
               "range": true,
               "refId": "A"
@@ -1182,15 +1182,15 @@ data:
               "type": "prometheus",
               "uid": "PBFA97CFB590B2093"
             },
-            "definition": "label_values(tyk_api_name)",
+            "definition": "label_values(traefik_api_name)",
             "hide": 0,
             "includeAll": true,
             "label": "API",
             "multi": false,
-            "name": "tykapiname",
+            "name": "traefikapiname",
             "options": [],
             "query": {
-              "query": "label_values(tyk_api_name)",
+              "query": "label_values(traefik_api_name)",
               "refId": "StandardVariableQuery"
             },
             "refresh": 2,
@@ -1468,7 +1468,7 @@ data:
                 "uid": "PBFA97CFB590B2093"
               },
               "editorMode": "code",
-              "expr": "histogram_quantile(0.90, sum(rate(tyk_http_latency_bucket{api_name=~\"$api_name\"}[1m])) by (le,api_name))",
+              "expr": "histogram_quantile(0.90, sum(rate(traefik_http_latency_bucket{api_name=~\"$api_name\"}[1m])) by (le,api_name))",
               "hide": false,
               "legendFormat": "p90",
               "range": true,
@@ -1480,7 +1480,7 @@ data:
                 "uid": "PBFA97CFB590B2093"
               },
               "editorMode": "code",
-              "expr": "histogram_quantile(0.95, sum(rate(tyk_http_latency_bucket{api_name=~\"$api_name\"}[1m])) by (le,api_name))",
+              "expr": "histogram_quantile(0.95, sum(rate(traefik_http_latency_bucket{api_name=~\"$api_name\"}[1m])) by (le,api_name))",
               "legendFormat": "p95",
               "range": true,
               "refId": "95th percentile"
@@ -1491,7 +1491,7 @@ data:
                 "uid": "PBFA97CFB590B2093"
               },
               "editorMode": "code",
-              "expr": "histogram_quantile(0.99, sum(rate(tyk_http_latency_bucket{api_name=~\"$api_name\"}[1m])) by (le,api_name))",
+              "expr": "histogram_quantile(0.99, sum(rate(traefik_http_latency_bucket{api_name=~\"$api_name\"}[1m])) by (le,api_name))",
               "hide": false,
               "legendFormat": "p99",
               "range": true,
@@ -1561,7 +1561,7 @@ data:
                 "uid": "PBFA97CFB590B2093"
               },
               "editorMode": "code",
-              "expr": "sum (rate(tyk_http_requests_total{api_name=~\"$api_name\"}[1m])) by (response_code)",
+              "expr": "sum (rate(traefik_http_requests_total{api_name=~\"$api_name\"}[1m])) by (response_code)",
               "hide": false,
               "legendFormat": "__auto",
               "range": true,
@@ -1682,7 +1682,7 @@ data:
                 "uid": "PBFA97CFB590B2093"
               },
               "editorMode": "code",
-              "expr": "sum (rate(tyk_http_requests_total{api_name=~\"$api_name\"}[1m])) by (path)",
+              "expr": "sum (rate(traefik_http_requests_total{api_name=~\"$api_name\"}[1m])) by (path)",
               "hide": false,
               "legendFormat": "__auto",
               "range": true,
@@ -1772,7 +1772,7 @@ data:
                 "uid": "PBFA97CFB590B2093"
               },
               "editorMode": "code",
-              "expr": "sum (rate(tyk_http_requests_total{api_name=~\"$api_name\"}[1m])) by (method)",
+              "expr": "sum (rate(traefik_http_requests_total{api_name=~\"$api_name\"}[1m])) by (method)",
               "hide": false,
               "legendFormat": "__auto",
               "range": true,
@@ -1824,7 +1824,7 @@ data:
       },
       "timepicker": {},
       "timezone": "",
-      "title": "SLOs for APIs managed by Tyk",
+      "title": "SLOs for APIs managed by traefik",
       "uid": "YjXeVVZ4k",
       "version": 1,
       "weekStart": ""

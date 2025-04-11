@@ -1,23 +1,20 @@
----
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: tyk-operator
+  name: traefik-ingress
   namespace: argocd
 spec:
   project: default
   source:
-    repoURL: https://helm.tyk.io/public/helm/charts
-    chart: tyk-operator
-    targetRevision: v1.0.0
-    helm:
-      releaseName: tyk-operator
+    repoURL: https://github.com/your-org/your-repo.git
+    targetRevision: HEAD
+    path: traefik-manifests
   destination:
     server: https://kubernetes.default.svc
-    namespace: tyk
+    namespace: traefik
   syncPolicy:
     automated:
-      prune: true
       selfHeal: true
+      prune: true
     syncOptions:
       - CreateNamespace=true

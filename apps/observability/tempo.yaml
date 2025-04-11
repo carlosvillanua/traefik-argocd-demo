@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: tyk-tempo
+  name: traefik-tempo
   namespace: argocd
 spec:
   project: default
@@ -11,7 +11,7 @@ spec:
     chart: tempo
     targetRevision: 1.10.3
     helm:
-      releaseName: tyk-tempo
+      releaseName: traefik-tempo
       values: |
         tempo:
           reportingEnabled: false
@@ -19,7 +19,7 @@ spec:
           enabled: true
   destination:
     server: https://kubernetes.default.svc
-    namespace: tyk
+    namespace: traefik
   syncPolicy:
     automated:
       prune: true

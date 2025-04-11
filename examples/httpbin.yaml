@@ -1,35 +1,8 @@
----
-apiVersion: tyk.tyk.io/v1alpha1
-kind: TykOasApiDefinition
-metadata:
-  name: httpbin
-  namespace: tyk
-spec:
-  tykOAS:
-    configmapRef:
-      name: httpbin
-      keyName: httpbin.json
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: httpbin-svc
-  namespace: tyk
-  labels:
-    app: httpbin
-spec:
-  ports:
-    - name: http
-      port: 8000
-      targetPort: 8080
-  selector:
-    app: httpbin
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: httpbin
-  namespace: tyk
+  namespace: traefik
 spec:
   replicas: 1
   selector:
@@ -52,12 +25,41 @@ spec:
             - name: OTEL_SERVICE_NAME
               value: "HttpBin"
             - name: OTEL_EXPORTER_OTLP_ENDPOINT
-              value: "http://tyk-otel-collector-opentelemetry-collector.tyk.svc:4317"
+              value: "http://traefik-otel-collector-opentelemetry-collector.traefik.svc:4317"
           securityContext:
-            runAsNonRoot: false  # Changed from true to false
+            runAsNonRoot: false
             allowPrivilegeEscalation: false
             capabilities:
               drop:
                 - ALL
             seccompProfile:
               type: RuntimeDefault
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: httpbin-svc
+  namespace: traefik
+  labels:
+    app: httpbin
+spec:
+  ports:
+    - name: http
+      port: 8000
+      targetPort: 8080
+  selector:
+    app: httpbin
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: httpbin-ingress
+  namespace: traefik 
+spec:
+  entryPoints:
+    - web
+  routes:
+  - match: Host(`httpbin.apigateway.docker.localhost`)
+    services:
+    - name: httpbin-svc
+      port: 8000

@@ -7,12 +7,12 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/TykTechnologies/tyk-argocd-demo.git
+    repoURL: https://github.com/traefik-workshops/traefik-argocd-demo.git
     targetRevision: HEAD
     path: resources/security/opa
   destination:
     server: https://kubernetes.default.svc
-    namespace: tyk
+    namespace: Traefik
   syncPolicy:
     automated:
       prune: true
