@@ -6,17 +6,11 @@ managing API authentication and authorization in k8s using OAuth2.0
 ## Installation
 
 ### Kubernetes Cluster
-You can find instructions on how to run this on k3d [here](). 
+You can find instructions on how to run this on k3d [here](https://github.com/carlosvillanua/traefik-argocd-demo/blob/main/docs/k3d.md). 
 
 ### Traefik
 
 #### Traefik Proxy
-Make sure you have the Traefik Gatewy token license key ready and replace "<REPLACE_WITH_TOKEN>" with it in the command below.
-
-Create secret with Traefik credentials:
-```
-kubectl create namespace traefik
-```
 
 Install Traefik using ArgoCD Application CRD
 

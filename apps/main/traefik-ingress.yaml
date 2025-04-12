@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://helm.traefik.io/traefik
+    repoURL: https://traefik.github.io/charts  # Corrected repository URL
     chart: traefik
     targetRevision: 34.4.0
     helm:
@@ -14,36 +14,30 @@ spec:
         ingressRoute:
           dashboard:
             enabled: true
-            matchRule: Host(`dashboard.docker.localhost`)  # Custom host rule
+            matchRule: Host(`dashboard.docker.localhost`)
             entryPoints:
-              - web  # Explicit entry point assignment
-        image:
-          registry: ghcr.io
-          repository: traefik/traefik
-          tag: v3.3.5
+              - web
+
         metrics:
-          prometheus: null
+          prometheus:
+            enabled: false
           otlp:
             enabled: true
             http:
-              enabled: true
               endpoint: http://traefik-otel-collector-opentelemetry-collector.traefik.svc:4318/v1/metrics
         
         tracing:
           otlp:
             enabled: true
             http:
-              enabled: true
               endpoint: http://traefik-otel-collector-opentelemetry-collector.traefik.svc:4318/v1/traces
         
-        providers:
-          kubernetesCRD:
-            namespaces:
-              - traefik
+        service:
+          type: ClusterIP
         
-        globalArguments:
-          - "--entrypoints.web.address=:80"  # Ensure web entrypoint exists
-        
+        logs:
+          general:
+            level: "DEBUG"
   destination:
     server: https://kubernetes.default.svc
     namespace: traefik
@@ -53,4 +47,3 @@ spec:
       prune: true
     syncOptions:
       - CreateNamespace=true
-
