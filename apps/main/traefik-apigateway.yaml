@@ -1,0 +1,61 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: traefik
+  namespace: argocd # Make sure ArgoCD is installed in this namespace or adjust according to your configuration
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default # You can change this to your desired ArgoCD project
+  source:
+    repoURL: https://helm.traefik.io/traefik # Traefik Helm repository
+    chart: traefik
+    targetRevision: 34.4.0
+    helm:
+      values: |
+        hub:
+          token: traefik-hub-license
+          apimanagement:
+            enabled: true
+        ingressClass:
+          enabled: false
+        ingressRoute:
+          dashboard:
+            enabled: true
+            matchRule: 'Host(`dashboard.docker.localhost`)'
+            entryPoints:
+              - web
+        image:
+          registry: ghcr.io
+          repository: traefik/traefik-hub
+          tag: v3.15.0
+        ports:
+          web:
+            nodePort: 30000
+          websecure:
+            nodePort: 30001
+        metrics:
+          prometheus: null
+          otlp:
+            enabled: true
+            http:
+              enabled: true
+              endpoint: http://traefik-otel-collector-opentelemetry-collector.traefik.svc:4318/v1/metrics
+        tracing:
+          otlp:
+            enabled: true
+            http:
+              enabled: true
+              endpoint: http://traefik-otel-collector-opentelemetry-collector.traefik.svc:4318/v1/traces
+      parameters:
+        - name: namespace
+          value: traefik
+  destination:
+    server: https://kubernetes.default.svc # The URL of your Kubernetes cluster
+    namespace: traefik
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

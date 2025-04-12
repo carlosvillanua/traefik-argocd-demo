@@ -11,13 +11,16 @@ spec:
     targetRevision: 34.4.0
     helm:
       values: |
+        ingressClass:
+          enabled: false
         ingressRoute:
           dashboard:
             enabled: true
             matchRule: Host(`dashboard.docker.localhost`)
             entryPoints:
               - web
-
+        image:
+          tag: v3.3.5
         metrics:
           prometheus:
             enabled: false
@@ -25,13 +28,12 @@ spec:
             enabled: true
             http:
               endpoint: http://traefik-otel-collector-opentelemetry-collector.traefik.svc:4318/v1/metrics
-        
+
         tracing:
           otlp:
             enabled: true
             http:
-              endpoint: http://traefik-otel-collector-opentelemetry-collector.traefik.svc:4318/v1/traces
-        
+              endpoint: http://traefik-otel-collector-opentelemetry-collector.traefik.svc:4318/v1/traces        
         service:
           type: ClusterIP
         
