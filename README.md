@@ -14,8 +14,13 @@ You can find instructions on how to run this on k3d [here](https://github.com/ca
 
 Install Traefik using ArgoCD Application CRD
 
+export TRAEFIK_HUB_TOKEN=<ADD YOUR API GATEWAY TOKEN> 
+
+kubectl create namespace traefik
+kubectl create secret generic traefik-hub-license --namespace traefik --from-literal=token=$TRAEFIK_HUB_TOKEN
+
 ```
-kubectl apply -f apps/main/traefik-ingress.yaml -n argocd
+kubectl apply -f apps/main/traefik-apigateway.yaml -n argocd
 
 ```
 

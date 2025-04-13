@@ -47,6 +47,11 @@ spec:
             http:
               enabled: true
               endpoint: http://traefik-otel-collector-opentelemetry-collector.traefik.svc:4318/v1/traces
+        experimental:
+          plugins:
+            jwt:
+              moduleName: github.com/traefik-plugins/traefik-jwt-plugin
+              version: v0.7.1
       parameters:
         - name: namespace
           value: traefik
