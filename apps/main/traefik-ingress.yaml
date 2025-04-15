@@ -28,18 +28,11 @@ spec:
             enabled: true
             http:
               endpoint: http://traefik-otel-collector-opentelemetry-collector.traefik.svc:4318/v1/metrics
-
         tracing:
           otlp:
             enabled: true
             http:
-              endpoint: http://traefik-otel-collector-opentelemetry-collector.traefik.svc:4318/v1/traces        
-        service:
-          type: ClusterIP
-        
-        logs:
-          general:
-            level: "DEBUG"
+              endpoint: http://traefik-otel-collector-opentelemetry-collector.traefik.svc:4318/v1/traces         
   destination:
     server: https://kubernetes.default.svc
     namespace: traefik

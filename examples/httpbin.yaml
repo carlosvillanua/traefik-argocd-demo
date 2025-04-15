@@ -66,8 +66,8 @@ spec:
     middlewares:
     - name: jwt
       namespace: traefik
-    - name: opa
-      namespace: traefik
+#    - name: opa
+#      namespace: traefik
 
 ---
 apiVersion: traefik.io/v1alpha1
