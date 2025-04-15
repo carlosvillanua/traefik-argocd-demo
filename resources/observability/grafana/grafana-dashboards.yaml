@@ -4,7 +4,316 @@ kind: ConfigMap
 metadata:
   name: grafana-dashboards-configmap
 data:
-  observability.json: |
+  api-management.json: |
+    {
+      "annotations": {
+      "list": [
+        {
+        "builtIn": 1,
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+        }
+      ]
+      },
+      "editable": true,
+      "fiscalYearStartMonth": 0,
+      "graphTooltip": 0,
+      "id": 2,
+      "links": [],
+      "liveNow": false,
+      "panels": [
+      {
+        "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+        },
+        "fieldConfig": {
+        "defaults": {
+          "color": {
+          "mode": "palette-classic"
+          },
+          "custom": {
+          "axisBorderShow": false,
+          "axisCenteredZero": false,
+          "axisColorMode": "text",
+          "axisLabel": "",
+          "axisPlacement": "auto",
+          "fillOpacity": 80,
+          "gradientMode": "none",
+          "hideFrom": {
+            "legend": false,
+            "tooltip": false,
+            "viz": false
+          },
+          "lineWidth": 1,
+          "scaleDistribution": {
+            "type": "linear"
+          },
+          "thresholdsStyle": {
+            "mode": "off"
+          }
+          },
+          "mappings": [],
+          "thresholds": {
+          "mode": "absolute",
+          "steps": [
+            {
+            "color": "green",
+            "value": null
+            },
+            {
+            "color": "red",
+            "value": 80
+            }
+          ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+        },
+        "gridPos": {
+        "h": 21,
+        "w": 24,
+        "x": 0,
+        "y": 0
+        },
+        "id": 11,
+        "interval": "20m",
+        "options": {
+        "barRadius": 0,
+        "barWidth": 0.85,
+        "fullHighlight": false,
+        "groupWidth": 0.5,
+        "legend": {
+          "calcs": [
+          "min",
+          "max",
+          "mean",
+          "lastNotNull"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true,
+          "sortBy": "Name",
+          "sortDesc": false
+        },
+        "orientation": "auto",
+        "showValue": "auto",
+        "stacking": "none",
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "xTickLabelRotation": 0,
+        "xTickLabelSpacing": -300
+        },
+        "targets": [
+        {
+          "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "traefik_hub_api_nodes_ratio",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "nodes",
+          "range": false,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "traefik_hub_acps_ratio",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "acps",
+          "range": false,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "traefik_hub_api_collections_ratio",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "api collections",
+          "range": false,
+          "refId": "C"
+        },
+        {
+          "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "traefik_hub_api_rate_limits_ratio",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "api rate limits",
+          "range": false,
+          "refId": "D"
+        },
+        {
+          "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "traefik_hub_api_accesses_ratio",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "api accesses",
+          "range": false,
+          "refId": "E"
+        },
+        {
+          "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "traefik_hub_api_gateways_ratio",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "gateways",
+          "range": false,
+          "refId": "F"
+        },
+        {
+          "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "traefik_hub_portals_ratio{portal_type=\"single_cluster\"}",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "portals",
+          "range": false,
+          "refId": "G"
+        },
+        {
+          "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "traefik_hub_api_gateway_apis_ratio{}",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "apis",
+          "range": false,
+          "refId": "H"
+        },
+        {
+          "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "traefik_hub_api_versions_ratio{}",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "api versions",
+          "range": false,
+          "refId": "I"
+        },
+        {
+          "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum(traefik_hub_api_keys_ratio{})",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "api keys",
+          "range": false,
+          "refId": "J"
+        }
+        ],
+        "title": "# API management resources",
+        "type": "barchart"
+      }
+      ],
+      "refresh": "",
+      "schemaVersion": 38,
+      "tags": [
+      "kubernetes"
+      ],
+      "templating": {
+      "list": []
+      },
+      "time": {
+      "from": "now-15m",
+      "to": "now"
+      },
+      "timepicker": {
+      "refresh_intervals": [
+        "5s",
+        "10s",
+        "30s",
+        "1m",
+        "5m",
+        "15m",
+        "30m",
+        "1h",
+        "2h",
+        "1d"
+      ],
+      "time_options": [
+        "5m",
+        "15m",
+        "1h",
+        "6h",
+        "12h",
+        "24h",
+        "2d",
+        "7d",
+        "30d"
+      ]
+      },
+      "timezone": "browser",
+      "title": "API Management",
+      "uid": "eb0a9268-05e8-4ec4-8d2c-c1705da6a885",
+      "version": 8,
+      "weekStart": ""
+    }
+  api.json: |
     {
       "annotations": {
         "list": [
@@ -15,14 +324,16 @@ data:
               "uid": "-- Grafana --"
             },
             "enable": true,
-            "hide": true,
+            "hide": false,
             "iconColor": "rgba(0, 211, 255, 1)",
             "name": "Annotations & Alerts",
             "target": {
               "limit": 100,
-              "matchAny": false,
-              "tags": [],
-              "type": "dashboard"
+              "matchAny": true,
+              "tags": [
+                "flux"
+              ],
+              "type": "tags"
             },
             "type": "dashboard"
           }
@@ -31,200 +342,29 @@ data:
       "editable": true,
       "fiscalYearStartMonth": 0,
       "graphTooltip": 0,
-      "links": [],
+      "id": 3,
+      "links": [
+        {
+          "asDropdown": false,
+          "icon": "external link",
+          "includeVars": false,
+          "keepTime": true,
+          "tags": [
+            "hub"
+          ],
+          "targetBlank": false,
+          "title": "Hub",
+          "tooltip": "",
+          "type": "dashboards",
+          "url": ""
+        }
+      ],
       "liveNow": false,
       "panels": [
         {
           "datasource": {
-            "type": "datasource",
-            "uid": "grafana"
-          },
-          "gridPos": {
-            "h": 8,
-            "w": 6,
-            "x": 0,
-            "y": 0
-          },
-          "id": 11,
-          "options": {
-            "code": {
-              "language": "plaintext",
-              "showLineNumbers": false,
-              "showMiniMap": false
-            },
-            "content": "<h3>API Observability</h3>\npowered by<br /> \ntraefik & OpenTelemetry<br />\n\n<img width= \"170\" src=\"/public/img/traefik-opentelemetry.png\" />\n<br />\n🔗 <a href=\"http://localhost:16686/\" target=\"_blank\">Distributed traces in Jaeger</a>",
-            "mode": "markdown"
-          },
-          "pluginVersion": "10.2.2",
-          "transparent": true,
-          "type": "text"
-        },
-        {
-          "datasource": {
-            "type": "datasource",
-            "uid": "grafana"
-          },
-          "description": "",
-          "gridPos": {
-            "h": 2,
-            "w": 17,
-            "x": 6,
-            "y": 0
-          },
-          "id": 25,
-          "options": {
-            "code": {
-              "language": "plaintext",
-              "showLineNumbers": false,
-              "showMiniMap": false
-            },
-            "content": "",
-            "mode": "markdown"
-          },
-          "pluginVersion": "10.2.2",
-          "transparent": true,
-          "type": "text"
-        },
-        {
-          "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
-          },
-          "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "fixedColor": "#808080",
-                "mode": "fixed"
-              },
-              "decimals": 0,
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "#335ffd",
-                    "value": null
-                  }
-                ]
-              },
-              "unit": "reqps"
-            },
-            "overrides": [
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Requests"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "#335ffd",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Client-side errors"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "#ea26a9",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Server-side errors"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "#ea26a9",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              }
-            ]
-          },
-          "gridPos": {
-            "h": 5,
-            "w": 13,
-            "x": 6,
-            "y": 2
-          },
-          "id": 14,
-          "options": {
-            "colorMode": "value",
-            "graphMode": "area",
-            "justifyMode": "auto",
-            "orientation": "auto",
-            "reduceOptions": {
-              "calcs": [
-                "lastNotNull"
-              ],
-              "fields": "",
-              "values": false
-            },
-            "textMode": "auto",
-            "wideLayout": true
-          },
-          "pluginVersion": "10.2.2",
-          "targets": [
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
-              },
-              "editorMode": "code",
-              "expr": "sum(rate(calls_total{span_kind=\"SPAN_KIND_SERVER\",traefik_api_name=~\"$traefikapiname\",service_name=\"traefik\"}[1m])) or vector(0)\n",
-              "legendFormat": "Requests",
-              "range": true,
-              "refId": "A"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
-              },
-              "editorMode": "code",
-              "expr": "sum(rate(calls_total{span_kind=\"SPAN_KIND_SERVER\",http_status_code=~\"[5][0-9]{2}\",traefik_api_name=~\"$traefikapiname\",service_name=\"traefik\"}[1m])) or vector(0)\n\n",
-              "hide": false,
-              "legendFormat": "Server-side errors",
-              "range": true,
-              "refId": "B"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
-              },
-              "editorMode": "code",
-              "expr": "sum(rate(calls_total{span_kind=\"SPAN_KIND_SERVER\",http_status_code=~\"[4][0-9]{2}\",traefik_api_name=~\"$traefikapiname\",service_name=\"traefik\"}[1m])) or vector(0)\n\n",
-              "hide": false,
-              "legendFormat": "Client-side errors",
-              "range": true,
-              "refId": "C"
-            }
-          ],
-          "transparent": true,
-          "type": "stat"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
           "description": "",
           "fieldConfig": {
@@ -233,18 +373,7 @@ data:
                 "mode": "thresholds"
               },
               "decimals": 0,
-              "mappings": [
-                {
-                  "options": {
-                    "match": "nan",
-                    "result": {
-                      "index": 0,
-                      "text": "0 ms"
-                    }
-                  },
-                  "type": "special"
-                }
-              ],
+              "mappings": [],
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -254,36 +383,20 @@ data:
                   }
                 ]
               },
-              "unit": "ms"
+              "unit": "short"
             },
-            "overrides": [
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Duration (p99)"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "#5900cb",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              }
-            ]
+            "overrides": []
           },
           "gridPos": {
-            "h": 5,
-            "w": 4,
-            "x": 19,
-            "y": 2
+            "h": 8,
+            "w": 3,
+            "x": 0,
+            "y": 0
           },
-          "id": 15,
+          "id": 4,
           "options": {
             "colorMode": "value",
-            "graphMode": "area",
+            "graphMode": "none",
             "justifyMode": "auto",
             "orientation": "auto",
             "reduceOptions": {
@@ -293,118 +406,158 @@ data:
               "fields": "",
               "values": false
             },
-            "textMode": "auto",
-            "wideLayout": true
+            "textMode": "auto"
           },
-          "pluginVersion": "10.2.2",
+          "pluginVersion": "10.2.0",
           "targets": [
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "prometheus"
               },
+              "disableTextWrap": false,
               "editorMode": "code",
-              "exemplar": false,
-              "expr": "histogram_quantile(0.99, sum(rate(duration_milliseconds_bucket{span_kind=\"SPAN_KIND_SERVER\",traefik_api_name=~\"$traefikapiname\",service_name=\"traefik\"}[1m])) by (le)) or vector(0)",
-              "hide": false,
+              "exemplar": true,
+              "expr": "sum(increase(traefik_hub_api_requests_total{api_name=~\"$api_name\",api_version_name=~\"$api_version_name\"}[$__range]))",
+              "format": "time_series",
+              "fullMetaSearch": false,
+              "includeNullMetadata": true,
               "instant": false,
-              "legendFormat": "Duration (p99)",
+              "legendFormat": "__auto",
               "range": true,
-              "refId": "A"
+              "refId": "A",
+              "useBackend": false
             }
           ],
-          "transparent": true,
+          "title": "Total # of requests",
           "type": "stat"
-        },
-        {
-          "collapsed": false,
-          "gridPos": {
-            "h": 1,
-            "w": 24,
-            "x": 0,
-            "y": 8
-          },
-          "id": 19,
-          "panels": [],
-          "title": "Requests",
-          "type": "row"
         },
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
           "description": "",
           "fieldConfig": {
             "defaults": {
               "color": {
-                "fixedColor": "#335ffd",
-                "mode": "fixed"
+                "mode": "thresholds"
               },
-              "custom": {
-                "axisBorderShow": false,
-                "axisCenteredZero": false,
-                "axisColorMode": "text",
-                "axisLabel": "",
-                "axisPlacement": "auto",
-                "barAlignment": 0,
-                "drawStyle": "line",
-                "fillOpacity": 20,
-                "gradientMode": "none",
-                "hideFrom": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": false
-                },
-                "insertNulls": false,
-                "lineInterpolation": "linear",
-                "lineWidth": 2,
-                "pointSize": 3,
-                "scaleDistribution": {
-                  "type": "linear"
-                },
-                "showPoints": "never",
-                "spanNulls": false,
-                "stacking": {
-                  "group": "A",
-                  "mode": "none"
-                },
-                "thresholdsStyle": {
-                  "mode": "off"
-                }
-              },
-              "decimals": 0,
               "mappings": [],
-              "noValue": "-",
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "#335ffd",
+                    "color": "green",
                     "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
                   }
                 ]
-              },
-              "unit": "reqps"
+              }
             },
             "overrides": []
           },
           "gridPos": {
-            "h": 7,
-            "w": 12,
-            "x": 0,
-            "y": 9
+            "h": 8,
+            "w": 2,
+            "x": 3,
+            "y": 0
+          },
+          "id": 9,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "none",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "auto"
+          },
+          "pluginVersion": "10.2.0",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "disableTextWrap": false,
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "count(count by(email) (traefik_hub_api_requests_total{api_name=~\"$api_name\", api_version_name=~\"$api_version_name\",code!=\"401\"}))",
+              "format": "table",
+              "fullMetaSearch": false,
+              "includeNullMetadata": true,
+              "instant": false,
+              "legendFormat": "__auto",
+              "range": true,
+              "refId": "A",
+              "useBackend": false
+            }
+          ],
+          "title": "# Users",
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                }
+              },
+              "links": [
+                {
+                  "title": "",
+                  "url": "/d/bbc789b4-e88e-42a1-b969-1ce2b0038720/users?orgId=1&refresh=5s&var-email=${__field.labels.email}"
+                }
+              ],
+              "mappings": []
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 3,
+            "x": 5,
+            "y": 0
           },
           "id": 8,
           "options": {
+            "displayLabels": [
+              "percent"
+            ],
             "legend": {
-              "calcs": [],
               "displayMode": "list",
               "placement": "bottom",
               "showLegend": true
             },
+            "pieType": "pie",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
             "tooltip": {
-              "mode": "single",
+              "mode": "multi",
               "sort": "none"
             }
           },
@@ -412,65 +565,180 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "prometheus"
               },
               "editorMode": "code",
-              "expr": "sum by (http_status_code) (\n  rate(calls_total{span_kind=\"SPAN_KIND_SERVER\",traefik_api_name=~\"$traefikapiname\",service_name=\"traefik\"}[1m])\n)",
-              "legendFormat": "__auto",
+              "expr": "sum by (email) (rate(traefik_hub_api_requests_total{api_name=~\"$api_name\", api_version_name=~\"$api_version_name\",code!=\"401\"}[1m])) > 0",
+              "instant": false,
+              "interval": "",
+              "legendFormat": "{{email}}",
               "range": true,
               "refId": "A"
             }
           ],
-          "title": "Requests by response code",
-          "type": "timeseries"
+          "title": "Per users",
+          "type": "piechart"
         },
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
           "description": "",
           "fieldConfig": {
             "defaults": {
               "color": {
-                "fixedColor": "#335ffd",
-                "mode": "fixed"
+                "mode": "palette-classic"
               },
               "custom": {
-                "axisBorderShow": false,
-                "axisCenteredZero": false,
-                "axisColorMode": "text",
-                "axisLabel": "",
-                "axisPlacement": "auto",
-                "barAlignment": 0,
-                "drawStyle": "line",
-                "fillOpacity": 20,
-                "gradientMode": "none",
                 "hideFrom": {
                   "legend": false,
                   "tooltip": false,
                   "viz": false
-                },
-                "insertNulls": false,
-                "lineInterpolation": "linear",
-                "lineWidth": 2,
-                "pointSize": 3,
-                "scaleDistribution": {
-                  "type": "linear"
-                },
-                "showPoints": "never",
-                "spanNulls": false,
-                "stacking": {
-                  "group": "A",
-                  "mode": "none"
-                },
-                "thresholdsStyle": {
-                  "mode": "off"
                 }
               },
-              "decimals": 0,
+              "links": [
+                {
+                  "title": "",
+                  "url": "/d/bbc789b4-e88e-42a1-b969-1ce2b0038720/users?orgId=1&refresh=5s&var-email=${__field.labels.email}"
+                }
+              ],
+              "mappings": []
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 3,
+            "x": 8,
+            "y": 0
+          },
+          "id": 11,
+          "options": {
+            "displayLabels": [
+              "percent"
+            ],
+            "legend": {
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "pieType": "pie",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "editorMode": "code",
+              "expr": "sum by (method) (rate(traefik_hub_api_requests_total{api_name=~\"$api_name\", api_version_name=~\"$api_version_name\"}[1m])) > 0",
+              "instant": false,
+              "legendFormat": "__auto",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Per method",
+          "type": "piechart"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                }
+              },
+              "links": [
+                {
+                  "title": "",
+                  "url": "/d/bbc789b4-e88e-42a1-b969-1ce2b0038720/users?orgId=1&refresh=5s&var-email=${__field.labels.email}"
+                }
+              ],
+              "mappings": []
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 3,
+            "x": 11,
+            "y": 0
+          },
+          "id": 12,
+          "options": {
+            "displayLabels": [
+              "percent"
+            ],
+            "legend": {
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "pieType": "pie",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "editorMode": "code",
+              "expr": "sum by (code) (rate(traefik_hub_api_requests_total{api_name=~\"$api_name\", api_version_name=~\"$api_version_name\"}[1m])) > 0",
+              "instant": false,
+              "legendFormat": "__auto",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Per code",
+          "type": "piechart"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
               "mappings": [],
-              "noValue": "-",
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -479,74 +747,72 @@ data:
                     "value": null
                   },
                   {
-                    "color": "red",
-                    "value": 80
+                    "color": "#EAB839",
+                    "value": 2.0001
+                  },
+                  {
+                    "color": "dark-red",
+                    "value": 5
                   }
                 ]
               },
-              "unit": "reqps"
+              "unit": "percentunit"
             },
             "overrides": []
           },
           "gridPos": {
-            "h": 7,
-            "w": 12,
-            "x": 12,
-            "y": 9
+            "h": 8,
+            "w": 3,
+            "x": 14,
+            "y": 0
           },
-          "id": 26,
+          "id": 6,
           "options": {
-            "legend": {
-              "calcs": [],
-              "displayMode": "list",
-              "placement": "bottom",
-              "showLegend": true
+            "minVizHeight": 75,
+            "minVizWidth": 75,
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
             },
-            "tooltip": {
-              "mode": "single",
-              "sort": "none"
-            }
+            "showThresholdLabels": false,
+            "showThresholdMarkers": true
           },
+          "pluginVersion": "10.2.0",
           "targets": [
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "prometheus"
               },
+              "disableTextWrap": false,
               "editorMode": "code",
-              "expr": "sum by (http_method) (\n  rate(calls_total{span_kind=\"SPAN_KIND_SERVER\",traefik_api_name=~\"$traefikapiname\",service_name=\"traefik\"}[1m])\n)",
+              "expr": "sum(increase(traefik_hub_api_requests_total{api_name=~\"$api_name\", code!~\"(2.+)\", api_version_name=~\"$api_version_name\"}[$__range]))/sum(increase(traefik_hub_api_requests_total{api_name=~\"$api_name\", api_version_name=~\"$api_version_name\"}[$__range]))",
+              "fullMetaSearch": false,
+              "includeNullMetadata": true,
+              "instant": false,
               "legendFormat": "__auto",
               "range": true,
-              "refId": "A"
+              "refId": "A",
+              "useBackend": false
             }
           ],
-          "title": "Requests by http method",
-          "type": "timeseries"
-        },
-        {
-          "collapsed": false,
-          "gridPos": {
-            "h": 1,
-            "w": 24,
-            "x": 0,
-            "y": 16
-          },
-          "id": 23,
-          "panels": [],
-          "title": "Duration",
-          "type": "row"
+          "title": "Average error rate",
+          "type": "gauge"
         },
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
           "description": "",
           "fieldConfig": {
             "defaults": {
               "color": {
-                "fixedColor": "#5900cb",
-                "mode": "fixed"
+                "mode": "palette-classic"
               },
               "custom": {
                 "axisBorderShow": false,
@@ -556,7 +822,7 @@ data:
                 "axisPlacement": "auto",
                 "barAlignment": 0,
                 "drawStyle": "line",
-                "fillOpacity": 20,
+                "fillOpacity": 0,
                 "gradientMode": "none",
                 "hideFrom": {
                   "legend": false,
@@ -564,13 +830,13 @@ data:
                   "viz": false
                 },
                 "insertNulls": false,
-                "lineInterpolation": "linear",
-                "lineWidth": 2,
-                "pointSize": 3,
+                "lineInterpolation": "smooth",
+                "lineWidth": 1,
+                "pointSize": 5,
                 "scaleDistribution": {
                   "type": "linear"
                 },
-                "showPoints": "never",
+                "showPoints": "auto",
                 "spanNulls": false,
                 "stacking": {
                   "group": "A",
@@ -580,33 +846,36 @@ data:
                   "mode": "off"
                 }
               },
-              "decimals": 0,
               "mappings": [],
-              "noValue": "-",
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "#335ffd",
+                    "color": "red",
                     "value": null
                   }
                 ]
               },
-              "unit": "ms"
+              "unit": "reqps"
             },
             "overrides": []
           },
           "gridPos": {
-            "h": 7,
+            "h": 12,
             "w": 12,
             "x": 0,
-            "y": 17
+            "y": 8
           },
-          "id": 37,
+          "id": 1,
+          "interval": "10s",
           "options": {
             "legend": {
-              "calcs": [],
-              "displayMode": "list",
+              "calcs": [
+                "min",
+                "mean",
+                "max"
+              ],
+              "displayMode": "table",
               "placement": "bottom",
               "showLegend": true
             },
@@ -619,66 +888,81 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "prometheus"
               },
+              "disableTextWrap": false,
               "editorMode": "code",
-              "expr": "histogram_quantile(0.99, sum(rate(duration_milliseconds_bucket{span_kind=\"SPAN_KIND_SERVER\",traefik_api_name=~\"$traefikapiname\",service_name=\"traefik\"}[1m])) by (le))",
-              "legendFormat": "p99",
+              "expr": "sum(rate(traefik_hub_api_requests_total{api_name=~\"$api_name\",api_version_name=~\"$api_version_name\"}[1m])) by (api_name, api_version_name)",
+              "fullMetaSearch": false,
+              "includeNullMetadata": true,
+              "instant": false,
+              "interval": "",
+              "legendFormat": "All requests on {{api_name}} {{api_version_name}}",
               "range": true,
-              "refId": "A"
+              "refId": "A",
+              "useBackend": false
             },
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "prometheus"
               },
               "editorMode": "code",
-              "expr": "histogram_quantile(0.95, sum(rate(duration_milliseconds_bucket{span_kind=\"SPAN_KIND_SERVER\",traefik_api_name=~\"$traefikapiname\"}[1m])) by (le))",
+              "expr": "sum(rate(traefik_hub_api_requests_total{api_name=~\"$api_name\", api_version_name=~\"$api_version_name\", code!~\"2.*\"}[1m]))  by (api_name, api_version_name)",
               "hide": false,
-              "legendFormat": "p95",
+              "instant": false,
+              "legendFormat": "Non 2xx Requests on {{api_name}} {{api_version_name}}",
               "range": true,
               "refId": "B"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
-              },
-              "editorMode": "code",
-              "expr": "histogram_quantile(0.90, sum(rate(duration_milliseconds_bucket{span_kind=\"SPAN_KIND_SERVER\",traefik_api_name=~\"$traefikapiname\"}[1m])) by (le))",
-              "hide": false,
-              "legendFormat": "p90",
-              "range": true,
-              "refId": "C"
             }
           ],
-          "title": "p99, p95, p90",
+          "title": "Requests per API",
           "type": "timeseries"
         },
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
           "description": "",
           "fieldConfig": {
             "defaults": {
               "color": {
-                "fixedColor": "#5900cb",
-                "mode": "fixed"
+                "mode": "palette-classic"
               },
-              "mappings": [
-                {
-                  "options": {
-                    "match": "null+nan",
-                    "result": {
-                      "index": 0,
-                      "text": "0 ms"
-                    }
-                  },
-                  "type": "special"
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
                 }
-              ],
+              },
+              "mappings": [],
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -697,242 +981,22 @@ data:
             "overrides": []
           },
           "gridPos": {
-            "h": 7,
+            "h": 12,
             "w": 12,
             "x": 12,
-            "y": 17
+            "y": 8
           },
-          "id": 38,
-          "options": {
-            "displayMode": "lcd",
-            "minVizHeight": 10,
-            "minVizWidth": 0,
-            "namePlacement": "auto",
-            "orientation": "horizontal",
-            "reduceOptions": {
-              "calcs": [
-                "lastNotNull"
-              ],
-              "fields": "",
-              "values": false
-            },
-            "showUnfilled": true,
-            "valueMode": "color"
-          },
-          "pluginVersion": "10.2.2",
-          "targets": [
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
-              },
-              "editorMode": "code",
-              "expr": "histogram_quantile(0.99, sum(rate(duration_milliseconds_bucket{span_kind=\"SPAN_KIND_SERVER\",traefik_api_name=~\"$traefikapiname\",service_name=\"traefik\"}[1m])) by (le, span_name))",
-              "legendFormat": "__auto",
-              "range": true,
-              "refId": "A"
-            }
-          ],
-          "title": "Duration per span name",
-          "transformations": [],
-          "type": "bargauge"
-        },
-        {
-          "collapsed": false,
-          "gridPos": {
-            "h": 1,
-            "w": 24,
-            "x": 0,
-            "y": 24
-          },
-          "id": 34,
-          "panels": [],
-          "title": "API Gateway",
-          "type": "row"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
-          },
-          "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "fixedColor": "#808080",
-                "mode": "fixed"
-              },
-              "decimals": 0,
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "#335ffd",
-                    "value": null
-                  }
-                ]
-              },
-              "unit": "none"
-            },
-            "overrides": [
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Requests"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "#335ffd",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Client-side errors"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "#ea26a9",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Server-side errors"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "#ea26a9",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              }
-            ]
-          },
-          "gridPos": {
-            "h": 7,
-            "w": 3,
-            "x": 0,
-            "y": 25
-          },
-          "id": 41,
-          "options": {
-            "colorMode": "value",
-            "graphMode": "area",
-            "justifyMode": "auto",
-            "orientation": "auto",
-            "reduceOptions": {
-              "calcs": [
-                "lastNotNull"
-              ],
-              "fields": "",
-              "values": false
-            },
-            "textMode": "auto",
-            "wideLayout": true
-          },
-          "pluginVersion": "10.2.2",
-          "targets": [
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
-              },
-              "editorMode": "code",
-              "expr": "count(count(calls_total{span_kind=\"SPAN_KIND_SERVER\",traefik_api_name=~\"$traefikapiname\",service_name=\"traefik\"}) by (traefik_gw_id))\n",
-              "legendFormat": "Number of API gateways",
-              "range": true,
-              "refId": "A"
-            }
-          ],
-          "transparent": true,
-          "type": "stat"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
-          },
-          "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "fixedColor": "#335ffd",
-                "mode": "fixed"
-              },
-              "custom": {
-                "axisBorderShow": false,
-                "axisCenteredZero": false,
-                "axisColorMode": "text",
-                "axisLabel": "",
-                "axisPlacement": "auto",
-                "barAlignment": 0,
-                "drawStyle": "line",
-                "fillOpacity": 20,
-                "gradientMode": "none",
-                "hideFrom": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": false
-                },
-                "insertNulls": false,
-                "lineInterpolation": "linear",
-                "lineWidth": 2,
-                "pointSize": 3,
-                "scaleDistribution": {
-                  "type": "linear"
-                },
-                "showPoints": "never",
-                "spanNulls": false,
-                "stacking": {
-                  "group": "A",
-                  "mode": "none"
-                },
-                "thresholdsStyle": {
-                  "mode": "off"
-                }
-              },
-              "decimals": 0,
-              "mappings": [],
-              "noValue": "-",
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "#335ffd",
-                    "value": null
-                  }
-                ]
-              },
-              "unit": "reqps"
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 7,
-            "w": 21,
-            "x": 3,
-            "y": 25
-          },
-          "id": 42,
+          "id": 10,
+          "interval": "10s",
           "options": {
             "legend": {
-              "calcs": [],
-              "displayMode": "list",
+              "calcs": [
+                "min",
+                "max",
+                "mean",
+                "lastNotNull"
+              ],
+              "displayMode": "table",
               "placement": "bottom",
               "showLegend": true
             },
@@ -945,292 +1009,131 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "prometheus"
               },
+              "disableTextWrap": false,
               "editorMode": "code",
-              "expr": "sum by (traefik_gw_id) (\n  rate(calls_total{span_kind=\"SPAN_KIND_SERVER\",traefik_api_name=~\"$traefikapiname\", service_name=\"traefik\"}[1m])\n)",
-              "legendFormat": "__auto",
+              "exemplar": false,
+              "expr": "avg by (api_name, api_version_name) (rate(traefik_hub_api_requests_duration_milliseconds_sum{api_name=~\"$api_name\", api_version_name=~\"$api_version_name\"}[1m])) > 0",
+              "format": "time_series",
+              "fullMetaSearch": false,
+              "includeNullMetadata": true,
+              "instant": false,
+              "interval": "",
+              "legendFormat": "{{api_name}} {{api_version_name}}",
               "range": true,
-              "refId": "A"
+              "refId": "A",
+              "useBackend": false
             }
           ],
-          "title": "Requests by API gateway",
-          "type": "timeseries"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
-          },
-          "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "fixedColor": "#808080",
-                "mode": "fixed"
-              },
-              "decimals": 0,
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "#335ffd",
-                    "value": null
-                  }
-                ]
-              },
-              "unit": "none"
-            },
-            "overrides": [
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Requests"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "#335ffd",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Client-side errors"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "#ea26a9",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Server-side errors"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "#ea26a9",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              }
-            ]
-          },
-          "gridPos": {
-            "h": 7,
-            "w": 3,
-            "x": 0,
-            "y": 32
-          },
-          "id": 44,
-          "options": {
-            "colorMode": "value",
-            "graphMode": "area",
-            "justifyMode": "auto",
-            "orientation": "auto",
-            "reduceOptions": {
-              "calcs": [
-                "lastNotNull"
-              ],
-              "fields": "",
-              "values": false
-            },
-            "textMode": "auto",
-            "wideLayout": true
-          },
-          "pluginVersion": "10.2.2",
-          "targets": [
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
-              },
-              "editorMode": "code",
-              "expr": "count(count(calls_total{span_kind=\"SPAN_KIND_SERVER\",traefik_api_name=~\"$traefikapiname\",service_name=\"traefik\"}) by (service_version))\n",
-              "legendFormat": "API gateway versions",
-              "range": true,
-              "refId": "A"
-            }
-          ],
-          "transparent": true,
-          "type": "stat"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
-          },
-          "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "fixedColor": "#335ffd",
-                "mode": "fixed"
-              },
-              "custom": {
-                "axisBorderShow": false,
-                "axisCenteredZero": false,
-                "axisColorMode": "text",
-                "axisLabel": "",
-                "axisPlacement": "auto",
-                "barAlignment": 0,
-                "drawStyle": "line",
-                "fillOpacity": 20,
-                "gradientMode": "none",
-                "hideFrom": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": false
-                },
-                "insertNulls": false,
-                "lineInterpolation": "linear",
-                "lineWidth": 2,
-                "pointSize": 3,
-                "scaleDistribution": {
-                  "type": "linear"
-                },
-                "showPoints": "never",
-                "spanNulls": false,
-                "stacking": {
-                  "group": "A",
-                  "mode": "none"
-                },
-                "thresholdsStyle": {
-                  "mode": "off"
-                }
-              },
-              "decimals": 0,
-              "mappings": [],
-              "noValue": "-",
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "#335ffd",
-                    "value": null
-                  }
-                ]
-              },
-              "unit": "reqps"
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 7,
-            "w": 21,
-            "x": 3,
-            "y": 32
-          },
-          "id": 43,
-          "options": {
-            "legend": {
-              "calcs": [],
-              "displayMode": "list",
-              "placement": "bottom",
-              "showLegend": true
-            },
-            "tooltip": {
-              "mode": "single",
-              "sort": "none"
-            }
-          },
-          "targets": [
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
-              },
-              "editorMode": "code",
-              "expr": "sum by (service_version) (\n  rate(calls_total{span_kind=\"SPAN_KIND_SERVER\",traefik_api_name=~\"$traefikapiname\", service_name=\"traefik\"}[1m])\n)",
-              "legendFormat": "__auto",
-              "range": true,
-              "refId": "A"
-            }
-          ],
-          "title": "Requests by API gateway version",
+          "title": "Latency per API",
           "type": "timeseries"
         }
       ],
       "refresh": "5s",
-      "revision": 1,
       "schemaVersion": 38,
-      "tags": [],
+      "tags": [
+        "hub"
+      ],
       "templating": {
         "list": [
           {
             "allValue": ".*",
             "current": {
               "selected": false,
-              "text": "All",
-              "value": "$__all"
+              "text": "employee-api",
+              "value": "employee-api"
             },
             "datasource": {
               "type": "prometheus",
-              "uid": "PBFA97CFB590B2093"
+              "uid": "prometheus"
             },
-            "definition": "label_values(traefik_api_name)",
+            "definition": "label_values(api_name)",
             "hide": 0,
-            "includeAll": true,
-            "label": "API",
+            "includeAll": false,
+            "label": "API Name",
             "multi": false,
-            "name": "traefikapiname",
+            "name": "api_name",
             "options": [],
             "query": {
-              "query": "label_values(traefik_api_name)",
-              "refId": "StandardVariableQuery"
+              "qryType": 1,
+              "query": "label_values(api_name)",
+              "refId": "PrometheusVariableQueryEditor-VariableQuery"
             },
-            "refresh": 2,
+            "refresh": 1,
             "regex": "",
             "skipUrlSync": false,
-            "sort": 1,
+            "sort": 0,
+            "type": "query"
+          },
+          {
+            "allValue": ".*",
+            "current": {
+              "selected": true,
+              "text": [
+                "All"
+              ],
+              "value": [
+                "$__all"
+              ]
+            },
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "definition": "label_values({api_name=\"$api_name\"}, api_version_name)",
+            "hide": 0,
+            "includeAll": true,
+            "label": "API Version Name",
+            "multi": true,
+            "name": "api_version_name",
+            "options": [],
+            "query": {
+              "qryType": 5,
+              "query": "label_values({api_name=\"$api_name\"}, api_version_name)",
+              "refId": "PrometheusVariableQueryEditor-VariableQuery"
+            },
+            "refresh": 1,
+            "regex": "",
+            "skipUrlSync": false,
+            "sort": 0,
             "type": "query"
           }
         ]
       },
       "time": {
-        "from": "now-30m",
+        "from": "now-15m",
         "to": "now"
       },
       "timepicker": {},
       "timezone": "",
-      "title": "API Observability",
-      "uid": "TMChT834k",
-      "version": 6,
+      "title": "API",
+      "uid": "bbc789b4-e88e-42a1-b969-1ce2b0038725",
+      "version": 53,
       "weekStart": ""
-    }
-  slo.json: |
+    }   
+
+  hub-dashboard.json: |
     {
       "annotations": {
         "list": [
           {
             "builtIn": 1,
             "datasource": {
-              "type": "grafana",
-              "uid": "-- Grafana --"
+              "type": "datasource",
+              "uid": "grafana"
             },
             "enable": true,
-            "hide": true,
+            "hide": false,
             "iconColor": "rgba(0, 211, 255, 1)",
             "name": "Annotations & Alerts",
             "target": {
               "limit": 100,
-              "matchAny": false,
-              "tags": [],
-              "type": "dashboard"
+              "matchAny": true,
+              "tags": [
+                "flux"
+              ],
+              "type": "tags"
             },
             "type": "dashboard"
           }
@@ -1239,59 +1142,147 @@ data:
       "editable": true,
       "fiscalYearStartMonth": 0,
       "graphTooltip": 0,
-      "links": [],
+      "id": 4,
+      "links": [
+        {
+          "asDropdown": false,
+          "icon": "external link",
+          "includeVars": false,
+          "keepTime": true,
+          "tags": [
+            "hub"
+          ],
+          "targetBlank": false,
+          "title": "Hub",
+          "tooltip": "",
+          "type": "dashboards",
+          "url": ""
+        }
+      ],
       "liveNow": false,
       "panels": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
-          "description": "",
           "fieldConfig": {
             "defaults": {
               "color": {
                 "mode": "thresholds"
-              },
-              "custom": {
-                "fillOpacity": 70,
-                "lineWidth": 1
               },
               "mappings": [],
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "red",
-                    "value": null
-                  },
-                  {
                     "color": "green",
-                    "value": 95
+                    "value": null
                   }
                 ]
-              }
+              },
+              "unit": "short"
             },
             "overrides": []
           },
           "gridPos": {
             "h": 8,
-            "w": 12,
+            "w": 3,
             "x": 0,
             "y": 0
           },
-          "id": 17,
+          "id": 4,
           "options": {
-            "colWidth": 0.9,
+            "colorMode": "value",
+            "graphMode": "none",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "auto"
+          },
+          "pluginVersion": "10.2.0",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "disableTextWrap": false,
+              "editorMode": "code",
+              "exemplar": true,
+              "expr": "sum(increase(traefik_hub_api_requests_total{api_name=~\"$api_name\", api_version_name=~\"$api_version_name\"}[$__range]))",
+              "format": "time_series",
+              "fullMetaSearch": false,
+              "includeNullMetadata": true,
+              "instant": false,
+              "legendFormat": "__auto",
+              "range": true,
+              "refId": "A",
+              "useBackend": false
+            }
+          ],
+          "title": "Total # of requests",
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                }
+              },
+              "links": [
+                {
+                  "title": "",
+                  "url": "/d/bbc789b4-e88e-42a1-b969-1ce2b0038725/api?orgId=1&refresh=5s&var-api_name=${__field.labels.api_name}"
+                }
+              ],
+              "mappings": []
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 3,
+            "x": 3,
+            "y": 0
+          },
+          "id": 8,
+          "options": {
+            "displayLabels": [
+              "percent"
+            ],
             "legend": {
               "displayMode": "list",
               "placement": "bottom",
               "showLegend": true
             },
-            "rowHeight": 0.9,
-            "showValue": "auto",
+            "pieType": "pie",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
             "tooltip": {
-              "mode": "single",
+              "mode": "multi",
               "sort": "none"
             }
           },
@@ -1299,32 +1290,36 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "prometheus"
               },
               "editorMode": "code",
-              "expr": "job:error_budget:remaining{api_name=~\"$api_name\"}",
-              "legendFormat": "{{api_name}}",
+              "expr": "sum by (api_name, api_version_name) (rate(traefik_hub_api_requests_total{api_name=~\"$api_name\", api_version_name=~\"$api_version_name\"}[1m])) > 0",
+              "instant": false,
+              "legendFormat": "{{api_name}} {{api_version_name}}",
               "range": true,
               "refId": "A"
             }
           ],
-          "title": "Error budget remaining",
-          "type": "status-history"
+          "title": "Distribution",
+          "type": "piechart"
         },
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
-          "description": "Error rate: across all upstream services [request / s]\nRatio error / request",
           "fieldConfig": {
             "defaults": {
               "color": {
-                "fixedColor": "red",
-                "mode": "fixed"
+                "mode": "thresholds"
               },
+              "links": [
+                {
+                  "title": "",
+                  "url": "/d/bbc789b4-e88e-42a1-b969-1ce2b0038725/api?orgId=1&refresh=5s&var-api_name=${__field.labels.api_name}"
+                }
+              ],
               "mappings": [],
-              "noValue": "0",
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -1333,17 +1328,18 @@ data:
                     "value": null
                   }
                 ]
-              }
+              },
+              "unit": "short"
             },
             "overrides": []
           },
           "gridPos": {
             "h": 8,
-            "w": 12,
-            "x": 12,
+            "w": 5,
+            "x": 6,
             "y": 0
           },
-          "id": 4,
+          "id": 9,
           "options": {
             "colorMode": "value",
             "graphMode": "area",
@@ -1358,76 +1354,39 @@ data:
             },
             "textMode": "auto"
           },
-          "pluginVersion": "9.1.0",
+          "pluginVersion": "10.2.0",
           "targets": [
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "prometheus"
               },
+              "disableTextWrap": false,
               "editorMode": "code",
-              "expr": "task:http_response_error_rate{api_name=~\"$api_name\"}",
-              "hide": false,
-              "legendFormat": "{{api_name}} error rate [request / s]",
+              "exemplar": true,
+              "expr": "sum by (api_name) (increase(traefik_hub_api_requests_total{api_name=~\"$api_name\", api_version_name=~\"$api_version_name\"}[$__range])) > 0",
+              "format": "time_series",
+              "fullMetaSearch": false,
+              "includeNullMetadata": true,
+              "instant": false,
+              "legendFormat": "{{api_name}}",
               "range": true,
-              "refId": "Error rates"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
-              },
-              "editorMode": "code",
-              "expr": "job:slo_errors_per_request:ratio_rate10m{api_name=~\"$api_name\"}*100",
-              "hide": false,
-              "legendFormat": "{{api_name}} ratio error / request [%]",
-              "range": true,
-              "refId": "A"
+              "refId": "A",
+              "useBackend": false
             }
           ],
-          "title": "Error",
+          "title": "Total # of requests per API",
           "type": "stat"
         },
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
-          "description": "90th, 95th and 99th percentile in [ms]",
           "fieldConfig": {
             "defaults": {
               "color": {
-                "mode": "palette-classic"
-              },
-              "custom": {
-                "axisCenteredZero": false,
-                "axisColorMode": "text",
-                "axisLabel": "",
-                "axisPlacement": "auto",
-                "barAlignment": 0,
-                "drawStyle": "line",
-                "fillOpacity": 21,
-                "gradientMode": "opacity",
-                "hideFrom": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": false
-                },
-                "lineInterpolation": "linear",
-                "lineWidth": 2,
-                "pointSize": 5,
-                "scaleDistribution": {
-                  "type": "linear"
-                },
-                "showPoints": "never",
-                "spanNulls": false,
-                "stacking": {
-                  "group": "A",
-                  "mode": "none"
-                },
-                "thresholdsStyle": {
-                  "mode": "off"
-                }
+                "mode": "thresholds"
               },
               "mappings": [],
               "thresholds": {
@@ -1436,77 +1395,69 @@ data:
                   {
                     "color": "green",
                     "value": null
+                  },
+                  {
+                    "color": "#EAB839",
+                    "value": 2
+                  },
+                  {
+                    "color": "red",
+                    "value": 5
                   }
                 ]
-              }
+              },
+              "unit": "percentunit"
             },
             "overrides": []
           },
           "gridPos": {
             "h": 8,
-            "w": 12,
-            "x": 0,
-            "y": 8
+            "w": 2,
+            "x": 11,
+            "y": 0
           },
-          "id": 3,
+          "id": 6,
           "options": {
-            "legend": {
-              "calcs": [],
-              "displayMode": "list",
-              "placement": "bottom",
-              "showLegend": true
+            "minVizHeight": 75,
+            "minVizWidth": 75,
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
             },
-            "tooltip": {
-              "mode": "single",
-              "sort": "none"
-            }
+            "showThresholdLabels": false,
+            "showThresholdMarkers": true
           },
+          "pluginVersion": "10.2.0",
           "targets": [
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "prometheus"
               },
+              "disableTextWrap": false,
               "editorMode": "code",
-              "expr": "histogram_quantile(0.90, sum(rate(traefik_http_latency_bucket{api_name=~\"$api_name\"}[1m])) by (le,api_name))",
-              "hide": false,
-              "legendFormat": "p90",
+              "expr": "sum(increase(traefik_hub_api_requests_total{api_name=~\"$api_name\", api_version_name=~\"$api_version_name\", code!~\"(2.+|401)\"}[$__range]))/sum(increase(traefik_hub_api_requests_total{api_name=~\"$api_name\", api_version_name=~\"$api_version_name\", code=~\".+\"}[$__range]))",
+              "fullMetaSearch": false,
+              "includeNullMetadata": true,
+              "instant": false,
+              "legendFormat": "__auto",
               "range": true,
-              "refId": "90th percentile"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
-              },
-              "editorMode": "code",
-              "expr": "histogram_quantile(0.95, sum(rate(traefik_http_latency_bucket{api_name=~\"$api_name\"}[1m])) by (le,api_name))",
-              "legendFormat": "p95",
-              "range": true,
-              "refId": "95th percentile"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
-              },
-              "editorMode": "code",
-              "expr": "histogram_quantile(0.99, sum(rate(traefik_http_latency_bucket{api_name=~\"$api_name\"}[1m])) by (le,api_name))",
-              "hide": false,
-              "legendFormat": "p99",
-              "range": true,
-              "refId": "99th percentile"
+              "refId": "A",
+              "useBackend": false
             }
           ],
-          "title": "Upstream time",
-          "type": "timeseries"
+          "title": "Average error rate",
+          "type": "gauge"
         },
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
-          "description": "HTTP status codes returned by upstream services [request / s]",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -1519,28 +1470,28 @@ data:
                   "viz": false
                 }
               },
+              "links": [],
               "mappings": []
             },
             "overrides": []
           },
           "gridPos": {
             "h": 8,
-            "w": 12,
-            "x": 12,
-            "y": 8
+            "w": 3,
+            "x": 13,
+            "y": 0
           },
-          "id": 5,
+          "id": 11,
           "options": {
             "displayLabels": [
               "percent"
             ],
             "legend": {
               "displayMode": "list",
-              "placement": "right",
-              "showLegend": true,
-              "values": []
+              "placement": "bottom",
+              "showLegend": true
             },
-            "pieType": "donut",
+            "pieType": "pie",
             "reduceOptions": {
               "calcs": [
                 "lastNotNull"
@@ -1549,56 +1500,59 @@ data:
               "values": false
             },
             "tooltip": {
-              "mode": "single",
+              "mode": "multi",
               "sort": "none"
             }
           },
-          "pluginVersion": "9.1.0",
           "targets": [
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "prometheus"
               },
               "editorMode": "code",
-              "expr": "sum (rate(traefik_http_requests_total{api_name=~\"$api_name\"}[1m])) by (response_code)",
-              "hide": false,
+              "expr": "sum by (code) (rate(traefik_hub_api_requests_total{api_name=~\"$api_name\"}[1m])) > 0",
+              "instant": false,
               "legendFormat": "__auto",
               "range": true,
-              "refId": "Status code"
+              "refId": "A"
             }
           ],
-          "title": "Status codes",
+          "title": "Per code",
           "type": "piechart"
         },
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
-          "description": "[requests / s]",
           "fieldConfig": {
             "defaults": {
               "color": {
-                "mode": "palette-classic"
+                "fixedColor": "red",
+                "mode": "continuous-BlYlRd",
+                "seriesBy": "last"
               },
               "custom": {
+                "axisBorderShow": false,
                 "axisCenteredZero": false,
                 "axisColorMode": "text",
                 "axisLabel": "",
                 "axisPlacement": "auto",
+                "axisSoftMax": 100,
                 "barAlignment": 0,
                 "drawStyle": "line",
-                "fillOpacity": 21,
+                "fillOpacity": 0,
                 "gradientMode": "none",
                 "hideFrom": {
                   "legend": false,
                   "tooltip": false,
                   "viz": false
                 },
+                "insertNulls": false,
                 "lineInterpolation": "linear",
-                "lineWidth": 2,
-                "pointSize": 5,
+                "lineWidth": 1,
+                "pointSize": 1,
                 "scaleDistribution": {
                   "type": "linear"
                 },
@@ -1612,133 +1566,18 @@ data:
                   "mode": "off"
                 }
               },
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": null
-                  }
-                ]
-              }
-            },
-            "overrides": [
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "/cache"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "#73BF69",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "/status/{id}"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "dark-purple",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              }
-            ]
-          },
-          "gridPos": {
-            "h": 8,
-            "w": 12,
-            "x": 0,
-            "y": 16
-          },
-          "id": 14,
-          "options": {
-            "legend": {
-              "calcs": [],
-              "displayMode": "list",
-              "placement": "bottom",
-              "showLegend": true
-            },
-            "tooltip": {
-              "mode": "single",
-              "sort": "none"
-            }
-          },
-          "targets": [
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
-              },
-              "editorMode": "code",
-              "expr": "sum (rate(traefik_http_requests_total{api_name=~\"$api_name\"}[1m])) by (path)",
-              "hide": false,
-              "legendFormat": "__auto",
-              "range": true,
-              "refId": "Requests per path"
-            }
-          ],
-          "title": "Requests per path",
-          "type": "timeseries"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
-          },
-          "description": "[requests / s]",
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "palette-classic"
-              },
-              "custom": {
-                "axisCenteredZero": false,
-                "axisColorMode": "text",
-                "axisLabel": "",
-                "axisPlacement": "auto",
-                "barAlignment": 0,
-                "drawStyle": "line",
-                "fillOpacity": 21,
-                "gradientMode": "none",
-                "hideFrom": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": false
-                },
-                "lineInterpolation": "linear",
-                "lineWidth": 2,
-                "pointSize": 5,
-                "scaleDistribution": {
-                  "type": "linear"
-                },
-                "showPoints": "auto",
-                "spanNulls": false,
-                "stacking": {
-                  "group": "A",
-                  "mode": "none"
-                },
-                "thresholdsStyle": {
-                  "mode": "off"
+              "links": [
+                {
+                  "title": "",
+                  "url": "/d/bbc789b4-e88e-42a1-b969-1ce2b0038725/api?orgId=1&refresh=5s&var-api_name=${__field.labels.api_name}"
                 }
-              },
+              ],
               "mappings": [],
               "thresholds": {
-                "mode": "absolute",
+                "mode": "percentage",
                 "steps": [
                   {
-                    "color": "green",
+                    "color": "red",
                     "value": null
                   }
                 ]
@@ -1748,15 +1587,21 @@ data:
           },
           "gridPos": {
             "h": 8,
-            "w": 12,
-            "x": 12,
-            "y": 16
+            "w": 8,
+            "x": 16,
+            "y": 0
           },
-          "id": 15,
+          "id": 10,
+          "interval": "10s",
           "options": {
             "legend": {
-              "calcs": [],
-              "displayMode": "list",
+              "calcs": [
+                "min",
+                "max",
+                "mean",
+                "lastNotNull"
+              ],
+              "displayMode": "table",
               "placement": "bottom",
               "showLegend": true
             },
@@ -1769,46 +1614,440 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "prometheus"
+              },
+              "disableTextWrap": false,
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "sum (rate(traefik_hub_api_requests_duration_milliseconds_sum{api_name=~\"$api_name\", api_version_name=~\"$api_version_name\"}[1m])) > 0",
+              "format": "time_series",
+              "fullMetaSearch": false,
+              "includeNullMetadata": true,
+              "instant": false,
+              "interval": "",
+              "legendFormat": "All requests",
+              "range": true,
+              "refId": "A",
+              "useBackend": false
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
               },
               "editorMode": "code",
-              "expr": "sum (rate(traefik_http_requests_total{api_name=~\"$api_name\"}[1m])) by (method)",
+              "expr": "sum (rate(traefik_hub_api_requests_duration_milliseconds_sum{api_name=~\"$api_name\", api_version_name=~\"$api_version_name\", code!~\"(2.*|401)\"}[1m])) > 0",
               "hide": false,
-              "legendFormat": "__auto",
+              "instant": false,
+              "legendFormat": "Non 2xx Requests",
               "range": true,
-              "refId": "Requests per method"
+              "refId": "B"
             }
           ],
-          "title": "Requests per method",
+          "title": "Error requests",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 1,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "links": [
+                {
+                  "title": "",
+                  "url": "/d/bbc789b4-e88e-42a1-b969-1ce2b0038725/api?orgId=1&refresh=5s&var-api_name=${__field.labels.api_name}"
+                }
+              ],
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "short"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 12,
+            "w": 8,
+            "x": 0,
+            "y": 8
+          },
+          "id": 13,
+          "interval": "10s",
+          "options": {
+            "legend": {
+              "calcs": [
+                "min",
+                "max",
+                "mean",
+                "lastNotNull"
+              ],
+              "displayMode": "table",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "disableTextWrap": false,
+              "editorMode": "code",
+              "expr": "sum by (api_name, api_version_name) (rate(traefik_hub_api_requests_total{api_name=~\"$api_name\", api_version_name=~\"$api_version_name\"}[1m])) > 0",
+              "fullMetaSearch": false,
+              "includeNullMetadata": true,
+              "instant": false,
+              "legendFormat": "{{api_name}} {{api_version_name}}",
+              "range": true,
+              "refId": "A",
+              "useBackend": false
+            }
+          ],
+          "title": "Requests per API",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 1,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "links": [
+                {
+                  "title": "",
+                  "url": "/d/bbc789b4-e88e-42a1-b969-1ce2b0038725/api?orgId=1&refresh=5s&var-api_name=${__field.labels.api_name}"
+                }
+              ],
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "ms"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 12,
+            "w": 8,
+            "x": 8,
+            "y": 8
+          },
+          "id": 14,
+          "interval": "10s",
+          "options": {
+            "legend": {
+              "calcs": [
+                "min",
+                "max",
+                "mean",
+                "lastNotNull"
+              ],
+              "displayMode": "table",
+              "placement": "bottom",
+              "showLegend": true,
+              "sortBy": "Last *",
+              "sortDesc": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "disableTextWrap": false,
+              "editorMode": "code",
+              "expr": "avg by (api_name, api_version_name) (rate(traefik_hub_api_requests_duration_milliseconds_sum{api_name=~\"$api_name\", api_version_name=~\"$api_version_name\"}[1m])) > 0",
+              "fullMetaSearch": false,
+              "includeNullMetadata": true,
+              "instant": false,
+              "legendFormat": "{{api_name}} {{api_version_name}}",
+              "range": true,
+              "refId": "A",
+              "useBackend": false
+            }
+          ],
+          "title": "Latency per API",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 1,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "links": [
+                {
+                  "title": "",
+                  "url": "/d/bbc789b4-e88e-42a1-b969-1ce2b0038725/api?orgId=1&refresh=5s&var-api_name=${__field.labels.api_name}"
+                }
+              ],
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "percentunit"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 12,
+            "w": 8,
+            "x": 16,
+            "y": 8
+          },
+          "id": 12,
+          "interval": "10s",
+          "options": {
+            "legend": {
+              "calcs": [
+                "min",
+                "max",
+                "mean",
+                "lastNotNull"
+              ],
+              "displayMode": "table",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "disableTextWrap": false,
+              "editorMode": "code",
+              "expr": "sum by (api_name, api_version_name) (rate(traefik_hub_api_requests_total{api_name=~\"$api_name\", api_version_name=~\"$api_version_name\", code!~\"(2.*|401)\"}[1m]))/sum by (api_name) (rate(traefik_hub_api_requests_total{api_name=~\"$api_name\", api_version_name=~\"$api_version_name\"}[1m]))",
+              "fullMetaSearch": false,
+              "includeNullMetadata": true,
+              "instant": false,
+              "legendFormat": "{{api_name}} {{api_version_name}}",
+              "range": true,
+              "refId": "A",
+              "useBackend": false
+            }
+          ],
+          "title": "Error rate per API",
           "type": "timeseries"
         }
       ],
       "refresh": "5s",
-      "schemaVersion": 37,
-      "style": "dark",
-      "tags": [],
+      "schemaVersion": 38,
+      "tags": [
+        "hub"
+      ],
       "templating": {
         "list": [
           {
+            "allValue": ".*",
             "current": {
-              "selected": true,
+              "selected": false,
               "text": "All",
               "value": "$__all"
             },
             "datasource": {
               "type": "prometheus",
-              "uid": "PBFA97CFB590B2093"
+              "uid": "prometheus"
             },
             "definition": "label_values(api_name)",
             "hide": 0,
             "includeAll": true,
-            "label": "Select an API: ",
+            "label": "API Name",
             "multi": false,
             "name": "api_name",
             "options": [],
             "query": {
+              "qryType": 1,
               "query": "label_values(api_name)",
-              "refId": "StandardVariableQuery"
+              "refId": "PrometheusVariableQueryEditor-VariableQuery"
+            },
+            "refresh": 1,
+            "regex": "",
+            "skipUrlSync": false,
+            "sort": 0,
+            "type": "query"
+          },
+          {
+            "current": {
+              "selected": true,
+              "text": [
+                "All"
+              ],
+              "value": [
+                "$__all"
+              ]
+            },
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "definition": "label_values({api_name=\"$api_name\"}, api_version_name)",
+            "hide": 0,
+            "includeAll": true,
+            "label": "API Version",
+            "multi": true,
+            "name": "api_version_name",
+            "options": [],
+            "query": {
+              "qryType": 5,
+              "query": "label_values({api_name=\"$api_name\"}, api_version_name)",
+              "refId": "PrometheusVariableQueryEditor-VariableQuery"
             },
             "refresh": 1,
             "regex": "",
@@ -1819,13 +2058,13 @@ data:
         ]
       },
       "time": {
-        "from": "now-30m",
+        "from": "now-15m",
         "to": "now"
       },
       "timepicker": {},
       "timezone": "",
-      "title": "SLOs for APIs managed by traefik",
-      "uid": "YjXeVVZ4k",
-      "version": 1,
+      "title": "Hub Dashboard",
+      "uid": "c54cf5b9-6504-4074-9b5a-f9af39c8e1fb",
+      "version": 20,
       "weekStart": ""
     }

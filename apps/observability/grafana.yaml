@@ -58,36 +58,45 @@ spec:
           "dashboardproviders.yaml":
             "apiVersion": 1
             "providers":
-            - "name": "Observability"
+            - "name": "API"
               "orgId": "1"
               "type": "file"
               "disableDeletion": false
               "editable": true
               "updateIntervalSeconds": 10
               "options":
-                "path": "/etc/traefik-grafana/provisioning/dashboards/observability"
-            - "name": "SLO"
+                "path": "/etc/traefik-grafana/provisioning/dashboards/api"
+            - "name": "API-Management"
               "orgId": "1"
               "type": "file"
               "disableDeletion": false
               "editable": true
               "updateIntervalSeconds": 10
               "options":
-                "path": "/etc/traefik-grafana/provisioning/dashboards/slo"
+                "path": "/etc/traefik-grafana/provisioning/dashboards/api-management"
+            - "name": "Hub-Dashboard"
+              "orgId": "1"
+              "type": "file"
+              "disableDeletion": false
+              "editable": true
+              "updateIntervalSeconds": 10
+              "options":
+                "path": "/etc/traefik-grafana/provisioning/dashboards/hub-dashboard"
         "extraConfigmapMounts":
-        - "name": "grafana-observability-dashboards"
-          "mountPath": "/etc/traefik-grafana/provisioning/dashboards/observability/dashboard.json"
-          "subPath": "observability.json"
+        - "name": "grafana-api-dashboards"
+          "mountPath": "/etc/traefik-grafana/provisioning/dashboards/api/dashboard.json"
+          "subPath": "api.json"
           "configMap": "grafana-dashboards-configmap"
           "readOnly": true
-        - "name": "grafana-slo-dashboards"
-          "mountPath": "/etc/traefik-grafana/provisioning/dashboards/slo/dashboard.json"
-          "subPath": "slo.json"
+        - "name": "grafana-api-management-dashboards"
+          "mountPath": "/etc/traefik-grafana/provisioning/dashboards/api-management/dashboard.json"
+          "subPath": "api-management.json"
           "configMap": "grafana-dashboards-configmap"
           "readOnly": true
-        - "name": "traefik-opentelemetry-image-configmap"
-          "subPath": "traefik-opentelemetry.png"
-          "configMap": "traefik-opentelemetry-image-configmap"
+        - "name": "grafana-hub-dashboard-dashboards"
+          "mountPath": "/etc/traefik-grafana/provisioning/dashboards/hub-dashboard/dashboard.json"
+          "subPath": "hub-dashboard.json"
+          "configMap": "grafana-dashboards-configmap"
           "readOnly": true
   destination:
     server: https://kubernetes.default.svc
