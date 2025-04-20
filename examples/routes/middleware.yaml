@@ -1,6 +1,17 @@
 apiVersion: traefik.io/v1alpha1
 kind: Middleware
 metadata:
+  name: jwt
+  namespace: traefik
+spec:
+  plugin:
+    jwt:
+      jwksUrl: http://keycloak-service.traefik.svc:7000/realms/keycloak-oauth/protocol/openid-connect/certs
+
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
   name: opa
   namespace: traefik
 spec:
@@ -16,14 +27,3 @@ spec:
         }
       forwardHeaders:
         Group: data.example.policies.grp
-
----
-apiVersion: traefik.io/v1alpha1
-kind: Middleware
-metadata:
-  name: jwt
-  namespace: traefik
-spec:
-  plugin:
-    jwt:
-      jwksUrl: http://keycloak-service.traefik.svc:7000/realms/keycloak-oauth/protocol/openid-connect/certs
