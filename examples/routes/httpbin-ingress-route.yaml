@@ -14,5 +14,5 @@ spec:
 #   middlewares:
 #    - name: jwt
 #      namespace: traefik
-#    - name: opa
+#    - name: ratelimit
 #      namespace: traefik
