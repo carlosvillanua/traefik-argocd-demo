@@ -11,8 +11,8 @@ spec:
     services:
     - name: httpbin-svc
       port: 8000
-#    middlewares:
- #   - name: jwt
-  #    namespace: traefik
-   # - name: ratelimit
-    #  namespace: traefik
+    middlewares:
+    - name: jwt
+      namespace: traefik
+    - name: ratelimit
+      namespace: traefik
